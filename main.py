@@ -1,5 +1,9 @@
 import csv
 import pandas as pd
+from scipy.spatial import distance
+
+import numpy as np
+
 #
 # fake_dataset = pd.read_csv('example1.csv',header=None, sep=';',decimal=',')
 #
@@ -111,3 +115,40 @@ print (e)
 #usuawnie NaN w kolumnach
 f=e.dropna(axis=1, how='all')
 print (f)
+
+
+
+
+aaa = pd.read_csv('trend_line.csv')
+
+# Przykładowe dane
+x = [1, 2, 3, 4, 5]
+y = [2, 3, 4, 5, 6]
+
+
+
+
+def distance_point_to_curve(x0, y0, x_curve, y_curve):
+    distances = np.sqrt((x0 - x_curve)**2 + (y0 - y_curve)**2)
+    #min_distance = np.min(distances)
+    return distances
+
+
+#badany punkt
+x0=1
+y0=100
+
+#współrzędne krzywej
+x1=[1,2,3,4,5,6,7,8,9,10]
+y1=[10,20,30,40,50,60,70,80,90,100]
+
+dist= []
+
+for i in range (10):
+    a = (distance_point_to_curve(x0,y0,x1[i],y1[i]))
+    dist.append(a)
+print('wybranie najmniejszej odległości')
+min_distance = min(dist)
+print (min_distance)
+
+
