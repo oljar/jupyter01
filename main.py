@@ -119,11 +119,6 @@ print (f)
 
 
 
-aaa = pd.read_csv('trend_line.csv')
-
-# Przykładowe dane
-x = [1, 2, 3, 4, 5]
-y = [2, 3, 4, 5, 6]
 
 
 
@@ -134,21 +129,35 @@ def distance_point_to_curve(x0, y0, x_curve, y_curve):
     return distances
 
 
-#badany punkt
-x0=1
-y0=100
 
-#współrzędne krzywej
-x1=[1,2,3,4,5,6,7,8,9,10]
-y1=[10,20,30,40,50,60,70,80,90,100]
 
-dist= []
 
-for i in range (10):
-    a = (distance_point_to_curve(x0,y0,x1[i],y1[i]))
-    dist.append(a)
-print('wybranie najmniejszej odległości')
-min_distance = min(dist)
-print (min_distance)
+#współrzędne krzywej trendu
+x_trend_points=[1,2,3.656,4,5,6,7,8,9,1]
+y_trend_points=[1,20,30,40,50,60,70,80,90,1]
+
+
+#badane punkty
+
+x_exam_points=[1,20,30,40.765,50,60,70,80,90,100]
+y_exam_points=[1,20,30,40,50,60,70,80,90,100]
+
+
+def main_iteration(x1,y1,x,y):
+    dist_all=[]
+    for i in range(len(x)):
+        dist_sum = []
+        x0=x[i]
+        y0=y[i]
+        for j in range (len(x1)):
+            a = (distance_point_to_curve(x0,y0,x1[j],y1[j]))
+            dist_sum.append(a)
+        min_distance = min(dist_sum)
+        dist_all.append(min_distance)
+    return dist_all
+
+
+
+print(main_iteration(x_trend_points,y_trend_points,x_exam_points,y_exam_points))
 
 
