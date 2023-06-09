@@ -4,7 +4,7 @@ from scipy.spatial import distance
 import numpy.polynomial.polynomial as poly
 import matplotlib.pyplot as plt
 import numpy as np
-
+import math
 #
 # fake_dataset = pd.read_csv('example1.csv',header=None, sep=';',decimal=',')
 #
@@ -124,6 +124,11 @@ print (f)
 # examinated points
 
 df = pd.read_csv("data.csv",sep=';', decimal=',')
+
+# x_points = df['M00: ms'].tolist() # definition of columns -x
+#c=41.1
+# x_exam_points  = c * math.sqrt(x_points)
+#y_points = df['M01: ms'].tolist() # definition of columns -y
 
 x_exam_points = df['M00: ms'].tolist() # definition of columns -x
 y_exam_points = df['M01: ms'].tolist() # definition of columns -y
