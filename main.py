@@ -124,14 +124,22 @@ print (f)
 # examinated points
 
 df = pd.read_csv("data.csv",sep=';', decimal=',')
+df = df.sort_values(by='M00: ms', ascending=True)
 
 # x_points = df['M00: ms'].tolist() # definition of columns -x
 #c=41.1
 # x_exam_points  = c * math.sqrt(x_points)
 #y_points = df['M01: ms'].tolist() # definition of columns -y
 
-x_exam_points = df['M00: ms'].tolist() # definition of columns -x
-y_exam_points = df['M01: ms'].tolist() # definition of columns -y
+
+
+x_points = (df['M00: ms']).tolist() # definition of columns -x
+
+c=41.1 # reducer constns
+x_exam_points = [(c * math.sqrt(x) )for x in x_points]
+
+y_exam_points = (df['M01: ms']).tolist() # definition of columns -y
+
 
 deg = 2
 
@@ -189,8 +197,8 @@ sol_dist_pd = pd.DataFrame(main_iteration(x_trend_points,y_trend_points,x_exam_p
 
 sol_exam=pd.DataFrame()
 sol_exam['dist'] = sol_dist_pd
-sol_exam['X_Exam'] =  df['M00: ms']
-sol_exam['Y_Exam'] =  df['M01: ms']
+sol_exam['X_Exam'] =  x_exam_points
+sol_exam['Y_Exam'] = y_exam_points
 
 print('examinated points with distance')
 print(sol_exam)
@@ -215,8 +223,14 @@ plt.show()
 
 # filtrowanie
 
-dist_border = 2 # distance border
+dist_border = 30 # distance border
 filtred = sol_exam[sol_exam['dist']< dist_border]
 print('filtred')
 print(filtred)
+
+plt.plot(filtred['X_Exam'], filtred['Y_Exam'],"-o")
+
+plt.plot(sol_trend['X_Trend'], sol_trend['Y_Trend'],"-s")
+
+plt.show()
 
