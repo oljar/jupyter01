@@ -127,12 +127,15 @@ x_tag = 'M51: Pa'
 
 y_tag ='M53: Pa'
 
-
+dfa=pd.DataFrame()
 df = pd.read_csv("data_1.csv",sep=';', decimal=',')
 df = df.sort_values(by=x_tag, ascending=True)
-df = df.drop('DATUM:', axis=1)
-df = df.drop('ZEIT:', axis=1)
+
+# df[x_tag]=dfa(x_tag)
 #
+# df[y_tag]=dfa(y_tag)
+
+
 # df = df[df[x_tag]>= 0]
 # df = df.fillna(df.median())
 
