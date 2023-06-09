@@ -1,7 +1,8 @@
 import csv
 import pandas as pd
 from scipy.spatial import distance
-
+import numpy.polynomial.polynomial as poly
+import matplotlib.pyplot as plt
 import numpy as np
 
 #
@@ -118,9 +119,35 @@ print (f)
 
 
 
+############################################################
+
+# examinated points
+
+df = pd.read_csv("data.csv",sep=';', decimal=',')
+
+x_exam_points = df['M00: ms'].tolist() # definition of columns -x
+y_exam_points = df['M01: ms'].tolist() # definition of columns -y
+
+deg = 2
+
+# trend line
 
 
 
+start = x_exam_points[0]
+stop = x_exam_points[(len(x_exam_points)-1)]
+
+#  precision of sampling
+step = 0.1
+sequence = list(np.arange (start, stop, step))
+x_trend_points = sequence
+
+
+# coefficients od polynomial 2-grade (trend)
+coefs = poly.polyfit(x_exam_points, y_exam_points, deg)
+
+
+y_trend_points = poly.polyval(x_trend_points, coefs)
 
 
 def distance_point_to_curve(x0, y0, x_curve, y_curve):
@@ -128,19 +155,6 @@ def distance_point_to_curve(x0, y0, x_curve, y_curve):
     #min_distance = np.min(distances)
     return distances
 
-
-
-
-
-#współrzędne krzywej trendu
-x_trend_points=[1,2,3.656,4,5,6,7,8,9,1]
-y_trend_points=[1,20,30,40,50,60,70,80,90,1]
-
-
-#badane punkty
-
-x_exam_points=[1,20,30,40.765,50,60,70,80,90,100]
-y_exam_points=[1,20,30,40,50,60,70,80,90,100]
 
 
 def main_iteration(x1,y1,x,y):
@@ -158,6 +172,46 @@ def main_iteration(x1,y1,x,y):
 
 
 
-print(main_iteration(x_trend_points,y_trend_points,x_exam_points,y_exam_points))
 
+
+
+
+sol_dist_pd = pd.DataFrame(main_iteration(x_trend_points,y_trend_points,x_exam_points,y_exam_points))
+
+# print(f'd {sol_dist_pd}')
+# print(f'X {x_exam_points}')
+# print(f'Y {y_exam_points}')
+
+sol_exam=pd.DataFrame()
+sol_exam['dist'] = sol_dist_pd
+sol_exam['X_Exam'] =  df['M00: ms']
+sol_exam['Y_Exam'] =  df['M01: ms']
+
+print('examinated points with distance')
+print(sol_exam)
+
+
+sol_trend=pd.DataFrame()
+sol_trend['X_Trend'] = pd.DataFrame(x_trend_points)
+sol_trend['Y_Trend']  = pd.DataFrame(y_trend_points)
+
+
+#print(sol_trend)
+
+print('y trend')
+print (f'Krzywa - y = {coefs[2]}x^2 + {coefs[1]}x + {coefs[0]}' )
+
+plt.plot(sol_exam['X_Exam'], sol_exam['Y_Exam'],"-o")
+
+plt.plot(sol_trend['X_Trend'], sol_trend['Y_Trend'],"-s")
+
+plt.show()
+
+
+# filtrowanie
+
+dist_border = 2 # distance border
+filtred = sol_exam[sol_exam['dist']< dist_border]
+print('filtred')
+print(filtred)
 
