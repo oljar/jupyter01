@@ -123,22 +123,34 @@ print (f)
 
 # examinated points
 
-df = pd.read_csv("data.csv",sep=';', decimal=',')
-df = df.sort_values(by='M00: ms', ascending=True)
+x_tag = 'M51: Pa'
 
-# x_points = df['M00: ms'].tolist() # definition of columns -x
+y_tag ='M53: Pa'
+
+
+df = pd.read_csv("data_1.csv",sep=';', decimal=',')
+df = df.sort_values(by=x_tag, ascending=True)
+df = df.drop('DATUM:', axis=1)
+df = df.drop('ZEIT:', axis=1)
+#
+# df = df[df[x_tag]>= 0]
+# df = df.fillna(df.median())
+
+
+
+# x_points = df[x_tag].tolist() # definition of columns -x
 #c=41.1
 # x_exam_points  = c * math.sqrt(x_points)
-#y_points = df['M01: ms'].tolist() # definition of columns -y
+#y_points = df[y_tag].tolist() # definition of columns -y
 
 
 
-x_points = (df['M00: ms']).tolist() # definition of columns -x
+x_points = (df[x_tag]).tolist() # definition of columns -x
 
 c=41.1 # reducer constns
 x_exam_points = [(c * math.sqrt(x) )for x in x_points]
 
-y_exam_points = (df['M01: ms']).tolist() # definition of columns -y
+y_exam_points = (df[y_tag]).tolist() # definition of columns -y
 
 
 deg = 2
@@ -223,7 +235,7 @@ plt.show()
 
 # filtrowanie
 
-dist_border = 30 # distance border
+dist_border = 50 # distance border
 filtred = sol_exam[sol_exam['dist']< dist_border]
 print('filtred')
 print(filtred)
