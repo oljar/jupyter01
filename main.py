@@ -127,18 +127,18 @@ x_tag = 'M51: Pa'
 
 y_tag ='M53: Pa'
 
-dfa=pd.DataFrame()
-df = pd.read_csv("data_1.csv",sep=';', decimal=',')
+
+df = pd.read_csv("data_3.csv",sep=';', decimal=',')
 df = df.sort_values(by=x_tag, ascending=True)
 
-# df[x_tag]=dfa(x_tag)
-#
-# df[y_tag]=dfa(y_tag)
 
 
-# df = df[df[x_tag]>= 0]
-# df = df.fillna(df.median())
 
+# input filters
+df = df[df[x_tag]>= 0]
+df = df[df[y_tag]>= 0]
+df[x_tag] = df[x_tag].fillna(df[x_tag].median())
+df[y_tag] = df[y_tag].fillna(df[y_tag].median())
 
 
 # x_points = df[x_tag].tolist() # definition of columns -x
