@@ -197,9 +197,6 @@ def main_proces(ex,ey,dist_border=10000000):
 
 
 
-
-
-
     sol_dist_pd = pd.DataFrame(main_iteration(x_trend_points,y_trend_points,x_exam_points,y_exam_points))
 
     # print(f'd {sol_dist_pd}')
@@ -233,36 +230,30 @@ def main_proces(ex,ey,dist_border=10000000):
 
     x_output = filtred['X_Exam'].tolist()
     y_output = filtred['Y_Exam'].tolist()
-    return x_output,y_output
+    return x_output,y_output,x_trend_points,y_trend_points
 
 
 
-
-def chart(sol_exam,sol_trend):
-
-    plt.plot(sol_exam['X_Exam'], sol_exam['Y_Exam'], "-o")
-
-    plt.plot(sol_trend['X_Trend'], sol_trend['Y_Trend'], "-s")
-
-    plt.show()
-
-
-
-
-x_exam_pts_2, y_exam_pts_2 = main_proces(x_exam_pts,y_exam_pts)
+# Here set distance
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,y_exam_pts,122)
 #
-
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts_2,y_exam_pts_2)
 
 print(len(x_exam_pts_2))
 print(len(y_exam_pts_2))
 
+def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
 
 
 
+    plt.plot(x_exam_pts_2, y_exam_pts_2, "-o")
+
+    plt.plot(x_trend_pts_1, y_trend_pts_1, "-s")
+
+    plt.show()
 
 
-
-#chart(sol_exam_1,sol_trend_1)
+chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1)
 
 
 #
