@@ -18,105 +18,105 @@ import math
 #
 # df.to_csv('example_2.csv', encoding='utf-8')4
 
-
-# otwieranie pliku csv i iteracja csv
-with open('example1.csv', 'r') as csvfile:
-    lista_list = csv.reader(csvfile, delimiter=';')
-    filtered_list = []
-
-    for sublist in lista_list:
-        filtered_sublist = []
-        for element in sublist:
-
-
-                element = element.replace(",", ".")
-
-                try:
-                    element = float(element)
-                except:
-                    continue
-
-                filtered_sublist.append(element)
-
-        filtered_list.append(filtered_sublist)
-
-# konwersja csv do DataFrame
-print(filtered_list)
-df = pd.DataFrame(filtered_list)
-
-
-
-
-
-print (df)
-
-# iterracja DataFrame
-
-
-for i in range((df.shape)[0]):
-    for j in range((df.shape)[1]):
-        print(df.iloc[i,j])
-
-#zapis do csv
-z = df.to_csv()
-print(z)
-
-# zapis do csv bez indeksu i nagłówka
-x =df.to_csv( header=False, index=False)
-
-print(x)
-
-
-
-print (df)
-
-
-
-
-# filtracja
-
-a =df[df>1]
-
-print (a)
-
-# uzupełnienie zerem  NaN
-b=df.fillna(0)
-
-print(b)
-
-# uzupełnienie średnią NaN
-c=df.fillna(df.mean())
-print (c)
-
-# uzupełnienie medianą NaN
-c=df.fillna(df.median())
-print (c)
-
-# zapis DataFrame do CSV
-print(a.to_csv( header=False, index=False, sep= ';'))
-
-
-
-
-
-
-# filtracja w określonej kolumnie
-print('przewijanie po kolumnach ')
-for i in range(0,2):
-
-    d =df.loc[df[i]>1,i]
-
-    print (d)
-
-
-#filtracja
-
-e =df[df>3]
-print (e)
-#usuawnie NaN w kolumnach
-f=e.dropna(axis=1, how='all')
-print (f)
-
+#
+# # otwieranie pliku csv i iteracja csv
+# with open('example1.csv', 'r') as csvfile:
+#     lista_list = csv.reader(csvfile, delimiter=';')
+#     filtered_list = []
+#
+#     for sublist in lista_list:
+#         filtered_sublist = []
+#         for element in sublist:
+#
+#
+#                 element = element.replace(",", ".")
+#
+#                 try:
+#                     element = float(element)
+#                 except:
+#                     continue
+#
+#                 filtered_sublist.append(element)
+#
+#         filtered_list.append(filtered_sublist)
+#
+# # konwersja csv do DataFrame
+# #print(filtered_list)
+# df = pd.DataFrame(filtered_list)
+#
+#
+#
+#
+#
+# print (df)
+#
+# # iterracja DataFrame
+#
+#
+# for i in range((df.shape)[0]):
+#     for j in range((df.shape)[1]):
+#         print(df.iloc[i,j])
+#
+# #zapis do csv
+# z = df.to_csv()
+# print(z)
+#
+# # zapis do csv bez indeksu i nagłówka
+# x =df.to_csv( header=False, index=False)
+#
+# print(x)
+#
+#
+#
+# print (df)
+#
+#
+#
+#
+# # filtracja
+#
+# a =df[df>1]
+#
+# print (a)
+#
+# # uzupełnienie zerem  NaN
+# b=df.fillna(0)
+#
+# print(b)
+#
+# # uzupełnienie średnią NaN
+# c=df.fillna(df.mean())
+# print (c)
+#
+# # uzupełnienie medianą NaN
+# c=df.fillna(df.median())
+# print (c)
+#
+# # zapis DataFrame do CSV
+# print(a.to_csv( header=False, index=False, sep= ';'))
+#
+#
+#
+#
+#
+#
+# # filtracja w określonej kolumnie
+# print('przewijanie po kolumnach ')
+# for i in range(0,2):
+#
+#     d =df.loc[df[i]>1,i]
+#
+#     print (d)
+#
+#
+# #filtracja
+#
+# e =df[df>3]
+# print (e)
+# #usuawnie NaN w kolumnach
+# f=e.dropna(axis=1, how='all')
+# print (f)
+#
 
 
 ############################################################
@@ -128,36 +128,37 @@ x_tag = 'M51: Pa'
 y_tag ='M53: Pa'
 
 
-df = pd.read_csv("data_3.csv",sep=';', decimal=',')
-df = df.sort_values(by=x_tag, ascending=True)
+df1 = pd.read_csv("data_3.csv",sep=';', decimal=',')
+df1 = df1.sort_values(by=x_tag, ascending=True)
+
+df1 = df1[df1[x_tag]>= 0]
+df1 = df1[df1[y_tag]>= 0]
+
+df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
+df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
+
+x_points = (df1[x_tag]).tolist()  # definition of columns -x
+c=41.1 # reducer constns
+x_exam_pts = [(c * math.sqrt(x) )for x in x_points]
+
+y_exam_pts = (df1[y_tag]).tolist() # definition of columns -y
 
 
-def main_proces(df,dist_border=10000000):
+
+def main_proces(ex,ey,dist_border=10000000):
 
     # input filters
-    df = df[df[x_tag]>= 0]
-    df = df[df[y_tag]>= 0]
-    df[x_tag] = df[x_tag].fillna(df[x_tag].median())
-    df[y_tag] = df[y_tag].fillna(df[y_tag].median())
-
-
-
-
-    x_points = (df[x_tag]).tolist() # definition of columns -x
-
-    c=41.1 # reducer constns
-    x_exam_points = [(c * math.sqrt(x) )for x in x_points]
-
-    y_exam_points = (df[y_tag]).tolist() # definition of columns -y
-
 
     deg = 2
 
     # trend line
 
+    x_exam_points = ex
+
+    y_exam_points = ey
 
 
-    start = x_exam_points[0]
+    start = 0
     stop = x_exam_points[(len(x_exam_points)-1)]
 
     #  precision of sampling
@@ -210,8 +211,8 @@ def main_proces(df,dist_border=10000000):
     sol_exam['X_Exam'] =  x_exam_points
     sol_exam['Y_Exam'] = y_exam_points
 
-    print('examinated points with distance')
-    print(sol_exam)
+    #print('examinated points with distance')
+  #  print(sol_exam)
 
 
     sol_trend=pd.DataFrame()
@@ -226,8 +227,13 @@ def main_proces(df,dist_border=10000000):
 
     # distance border
     filtred = sol_exam[sol_exam['dist'] < dist_border]
+    print ('data frame')
+    print (filtred)
 
-    return filtred,sol_trend
+
+    x_output = filtred['X_Exam'].tolist()
+    y_output = filtred['Y_Exam'].tolist()
+    return x_output,y_output
 
 
 
@@ -242,28 +248,39 @@ def chart(sol_exam,sol_trend):
 
 
 
-sol_exam,sol_trend = main_proces(df)
 
-chart(sol_exam,sol_trend)
-
-df = main_proces(df)[0]
-df = df.rename(columns={'X_Exam': x_tag})
-df = df.rename(columns={'Y_Exam': y_tag})
-print (df)
-sol_exam,sol_trend  = main_proces(df,10000000)
-
-
-chart(sol_exam,sol_trend)
-
-# filtrowanie
-
-
-# print('filtred')
-# print(filtred)
+x_exam_pts_2, y_exam_pts_2 = main_proces(x_exam_pts,y_exam_pts)
 #
-# plt.plot(filtred['X_Exam'], filtred['Y_Exam'],"-o")
-#
-# plt.plot(sol_trend['X_Trend'], sol_trend['Y_Trend'],"-s")
-#
-# plt.show()
 
+
+print(len(x_exam_pts_2))
+print(len(y_exam_pts_2))
+
+
+
+
+
+
+
+#chart(sol_exam_1,sol_trend_1)
+
+
+#
+#
+# df2 = main_proces(df1[0],df1[1])[0]
+# df2 = df2.rename(columns={'X_Exam': x_tag})
+# df2 = df2.rename(columns={'Y_Exam': y_tag})
+#
+#
+#
+# #
+# # sol_exam_2,sol_trend_2  = main_proces(df2,0.4)
+# #
+# # #chart(sol_exam_2,sol_trend_2)
+# #
+# # # print ('linie trendu')
+# # # print(sol_exam_1)
+# # # print(sol_exam_2)
+# #
+# #
+# #
