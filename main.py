@@ -144,6 +144,13 @@ x_exam_pts = [(c * math.sqrt(x) )for x in x_points]
 
 y_exam_pts = (df1[y_tag]).tolist() # definition of columns -y
 
+def density_show (ex):
+
+    density = len(ex)/(ex[(len(ex)-1)]-ex[0])
+
+    return density
+
+
 
 
 def main_proces(ex,ey,dist_border=10000000):
@@ -154,9 +161,10 @@ def main_proces(ex,ey,dist_border=10000000):
 
     # trend line
 
-    x_exam_points = ex
 
+    x_exam_points = ex
     y_exam_points = ey
+
 
 
     start = x_exam_points[0]
@@ -233,16 +241,9 @@ def main_proces(ex,ey,dist_border=10000000):
 
     x_output = filtred['X_Exam'].tolist()
     y_output = filtred['Y_Exam'].tolist()
-    return x_output,y_output,x_trend_points,y_trend_points,density
+    return x_output,y_output,x_trend_points,y_trend_points
 
 
-
-# Here set distance
-
-dist_border = 100
-
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1,density_1 = main_proces(x_exam_pts,y_exam_pts,dist_border)
-#
 
 def density_control(x,y,density):
 
@@ -252,16 +253,6 @@ def density_control(x,y,density):
     y_set = (y[::n])
 
     return x_set,y_set
-
-
-
-#
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1,density_2 = main_proces(x_exam_pts_2,y_exam_pts_2)
-
-
-
-
-
 
 
 def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
@@ -275,14 +266,33 @@ def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
     plt.show()
 
 
-# density
 
 
 
-x_exam_pts_2 , y_exam_pts_2 = density_control(x_exam_pts_2,y_exam_pts_2,0.5)
 
-x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3,density_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
+# Here set distance
 
+dist_border = 100
+
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,y_exam_pts,dist_border)
+
+print (density_show(x_exam_pts_2))
+#
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts_2,y_exam_pts_2)
+print (density_show(x_exam_pts_2))
+
+
+
+
+#  Here set density
+density_factor = 0.1
+
+x_exam_pts_2 , y_exam_pts_2 = density_control(x_exam_pts_2,y_exam_pts_2,density_factor)
+
+
+
+x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
+print (density_show(x_exam_pts_3))
 chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3)
 
 
