@@ -258,34 +258,24 @@ def density_control(x,y,density):
     return x_set,y_set
 
 
-def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
+def chart(x,y,x_trend,y_trend,x_previous):
+
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    ax2 = ax1.twiny()
+
+    ax1.plot(x, y, "-o")
+    ax1.plot(x_trend, y_trend, "-s")
 
 
 
-    plt.plot(x_exam_pts_2, y_exam_pts_2, "-o")
+    ax2.set_xlim(0, len(x_previous))
 
-    plt.plot(x_trend_pts_1, y_trend_pts_1, "-s")
 
     plt.show()
 
 
-
-
-#hier set scope of slice
-down=100
-up=500
-
-x_slice, y_slice = x_exam_pts[down:up],y_exam_pts[down:up]
-
-
-
-#  Here set density of slice
-density_factor = 0.1
-
-x_slice_1, y_slice_1 = density_control(x_slice,y_slice,density_factor)
-
-# change data  with corrected density in described scope - down/up
-x_exam_pts[down:up:1],y_exam_pts[down:up:1]= x_slice_1[::1],y_slice_1[::1]
 
 
 
@@ -300,19 +290,60 @@ dist_border = 100
 
 x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,y_exam_pts,dist_border)
 
-print (density_show(x_exam_pts_2))
-#
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts_2,y_exam_pts_2)
-print (density_show(x_exam_pts_2))
 
+#
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_2,y_trend_pts_2 = main_proces(x_exam_pts_2,y_exam_pts_2)
+
+
+
+
+
+
+
+
+
+chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_2,y_trend_pts_2,x_exam_pts_2)
+
+
+#hier set % scope of slice
+
+down_procent= 20
+up_procent = 100
+
+
+down = int(len(x_exam_pts_2)*(down_procent/100))
+up = int(len(x_exam_pts_2)*(up_procent/100))
+
+
+
+x_slice, y_slice = x_exam_pts[down:up],y_exam_pts[down:up]
+
+
+
+#  Here set density of slice
+density_factor = 0.05
+
+x_slice_1, y_slice_1 = density_control(x_slice,y_slice,density_factor)
+
+# change data  with corrected density in described scope - down/up
+
+
+
+
+
+
+x_exam_pts_2[down:up:1],y_exam_pts_2[down:up:1]= x_slice_1[::1],y_slice_1[::1]
 
 
 
 
 x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
-print (density_show(x_exam_pts_3))
-print (x_exam_pts_3)
-chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3)
+
+
+
+chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3,x_exam_pts)
+
+
 
 
 #
