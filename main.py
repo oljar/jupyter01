@@ -270,7 +270,7 @@ def chart(x,y,x_trend,y_trend,x_previous):
 
 
 
-    ax2.set_xlim(0, len(x_previous))
+    ax2.set_xlim(0, 100)
 
 
     plt.show()
@@ -292,7 +292,7 @@ x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,
 
 
 #
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_2,y_trend_pts_2 = main_proces(x_exam_pts_2,y_exam_pts_2)
+x_exam_pts_3, y_exam_pts_3,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts_2,y_exam_pts_2)
 
 
 
@@ -302,26 +302,28 @@ x_exam_pts_2, y_exam_pts_2,x_trend_pts_2,y_trend_pts_2 = main_proces(x_exam_pts_
 
 
 
-chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_2,y_trend_pts_2,x_exam_pts_2)
+chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_1,y_trend_pts_1,x_exam_pts_2)
 
 
 #hier set % scope of slice
 
-down_procent= 20
+down_procent= 30
 up_procent = 100
 
 
-down = int(len(x_exam_pts_2)*(down_procent/100))
-up = int(len(x_exam_pts_2)*(up_procent/100))
+
+
+down = int(len(x_exam_pts_3)*(down_procent/100))
+up = int(len(x_exam_pts_3)*(up_procent/100))
 
 
 
-x_slice, y_slice = x_exam_pts[down:up],y_exam_pts[down:up]
+x_slice, y_slice = x_exam_pts_3[down:up],y_exam_pts_3[down:up]
 
 
 
 #  Here set density of slice
-density_factor = 0.05
+density_factor = 0.02
 
 x_slice_1, y_slice_1 = density_control(x_slice,y_slice,density_factor)
 
@@ -332,16 +334,16 @@ x_slice_1, y_slice_1 = density_control(x_slice,y_slice,density_factor)
 
 
 
-x_exam_pts_2[down:up:1],y_exam_pts_2[down:up:1]= x_slice_1[::1],y_slice_1[::1]
+x_exam_pts_3[down:up:1],y_exam_pts_3[down:up:1]= x_slice_1[::1],y_slice_1[::1]
 
 
 
 
-x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
+x_exam_pts_4, y_exam_pts_4,x_trend_pts_4,y_trend_pts_4 = main_proces(x_exam_pts_3,y_exam_pts_3)
 
 
 
-chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3,x_exam_pts)
+chart(x_exam_pts_4,y_exam_pts_4,x_trend_pts_4,y_trend_pts_4,x_exam_pts)
 
 
 
