@@ -129,7 +129,7 @@ x_tag = 'M51: Pa'
 y_tag ='M53: Pa'
 
 
-df1 = pd.read_csv("data_4.csv",sep=';', decimal=',')
+df1 = pd.read_csv("data_3.csv",sep=';', decimal=',')
 df1 = df1.sort_values(by=x_tag, ascending=True)
 
 df1 = df1[df1[x_tag]>= 0]
@@ -140,9 +140,12 @@ df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
 
 x_points = (df1[x_tag]).tolist()  # definition of columns -x
 c=41.1 # reducer constns
+
 x_exam_pts = [(c * math.sqrt(x) )for x in x_points]
 
 y_exam_pts = (df1[y_tag]).tolist() # definition of columns -y
+
+
 
 def density_show (ex):
 
@@ -268,11 +271,32 @@ def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
 
 
 
+#hier set scope of slice
+down=100
+up=500
+
+x_slice, y_slice = x_exam_pts[down:up],y_exam_pts[down:up]
+
+
+
+#  Here set density of slice
+density_factor = 0.1
+
+x_slice_1, y_slice_1 = density_control(x_slice,y_slice,density_factor)
+
+# change data  with corrected density in described scope - down/up
+x_exam_pts[down:up:1],y_exam_pts[down:up:1]= x_slice_1[::1],y_slice_1[::1]
+
+
 
 
 # Here set distance
 
+
+
 dist_border = 100
+
+
 
 x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,y_exam_pts,dist_border)
 
@@ -284,15 +308,10 @@ print (density_show(x_exam_pts_2))
 
 
 
-#  Here set density
-density_factor = 0.1
-
-x_exam_pts_2 , y_exam_pts_2 = density_control(x_exam_pts_2,y_exam_pts_2,density_factor)
-
-
 
 x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
 print (density_show(x_exam_pts_3))
+print (x_exam_pts_3)
 chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3)
 
 
