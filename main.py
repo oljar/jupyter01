@@ -5,6 +5,7 @@ import numpy.polynomial.polynomial as poly
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import random
 #
 # fake_dataset = pd.read_csv('example1.csv',header=None, sep=';',decimal=',')
 #
@@ -128,7 +129,7 @@ x_tag = 'M51: Pa'
 y_tag ='M53: Pa'
 
 
-df1 = pd.read_csv("data_3.csv",sep=';', decimal=',')
+df1 = pd.read_csv("data_4.csv",sep=';', decimal=',')
 df1 = df1.sort_values(by=x_tag, ascending=True)
 
 df1 = df1[df1[x_tag]>= 0]
@@ -158,7 +159,7 @@ def main_proces(ex,ey,dist_border=10000000):
     y_exam_points = ey
 
 
-    start = 0
+    start = x_exam_points[0]
     stop = x_exam_points[(len(x_exam_points)-1)]
 
     #  precision of sampling
@@ -224,23 +225,44 @@ def main_proces(ex,ey,dist_border=10000000):
 
     # distance border
     filtred = sol_exam[sol_exam['dist'] < dist_border]
-    print ('data frame')
-    print (filtred)
+
+    density = len(x_exam_points)/(x_exam_points[(len(x_exam_points)-1)]-x_exam_points[0])
+
+
 
 
     x_output = filtred['X_Exam'].tolist()
     y_output = filtred['Y_Exam'].tolist()
-    return x_output,y_output,x_trend_points,y_trend_points
+    return x_output,y_output,x_trend_points,y_trend_points,density
 
 
 
 # Here set distance
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts,y_exam_pts,122)
-#
-x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1 = main_proces(x_exam_pts_2,y_exam_pts_2)
 
-print(len(x_exam_pts_2))
-print(len(y_exam_pts_2))
+dist_border = 100
+
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1,density_1 = main_proces(x_exam_pts,y_exam_pts,dist_border)
+#
+
+def density_control(x,y,density):
+
+    n = int(1/density)
+
+    x_set = (x[::n])
+    y_set = (y[::n])
+
+    return x_set,y_set
+
+
+
+#
+x_exam_pts_2, y_exam_pts_2,x_trend_pts_1,y_trend_pts_1,density_2 = main_proces(x_exam_pts_2,y_exam_pts_2)
+
+
+
+
+
+
 
 def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
 
@@ -253,7 +275,15 @@ def chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1):
     plt.show()
 
 
-chart(x_exam_pts_2,y_exam_pts_2,x_trend_pts_1,y_trend_pts_1)
+# density
+
+
+
+x_exam_pts_2 , y_exam_pts_2 = density_control(x_exam_pts_2,y_exam_pts_2,0.5)
+
+x_exam_pts_3, y_exam_pts_3,x_trend_pts_3,y_trend_pts_3,density_3 = main_proces(x_exam_pts_2,y_exam_pts_2)
+
+chart(x_exam_pts_3,y_exam_pts_3,x_trend_pts_3,y_trend_pts_3)
 
 
 #
