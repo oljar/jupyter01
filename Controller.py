@@ -357,7 +357,6 @@ class Controller:
 
             plt.show()
 
-
         chart(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
 
     def modyfied_chart_execution_tab_0(self):
@@ -559,3 +558,30 @@ class Controller:
             self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
        # print(self.temporary_chart_6_data)
 
+
+
+
+    def united_chart_execution_tab_2(self):
+
+        print(list(self.temporary_chart_1_data[0]))
+        print(list(self.temporary_chart_1_data[1]))
+        print(list(self.temporary_chart_1_data[2]))
+        print(list(self.temporary_chart_1_data[3]))
+
+
+
+        def chart(x, y, x_trend, y_trend):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y, "-o")
+            ax1.plot(x_trend, y_trend, "-s")
+
+            ax2.set_xlim(0, 100)
+
+            plt.show()
+
+
+
+        chart(self.temporary_chart_1_data[0], self.temporary_chart_1_data[1], self.temporary_chart_1_data[2], self.temporary_chart_1_data[3])

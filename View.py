@@ -448,21 +448,21 @@ class View(ttk.Frame):
 
         #########################################################################################################################
 
-        self.aggregation_button_tab_2 = ttk.Button(lf302, text='Agreguj', command=self.get_data_button_clicked_tab_1)
+        self.aggregation_button_tab_2 = ttk.Button(lf302, text='Agreguj', command=self.aggregation_united_data_clicked_tab_2)
         self.aggregation_button_tab_2.grid(row=0, column=0, padx=10)
 
         #########################################################################################################################
 
 
 
-        self.united_chart_button_tab_2 = ttk.Button(lf303, text='Wykres zespolony', command=self.get_data_button_clicked_tab_1)
+        self.united_chart_button_tab_2 = ttk.Button(lf303, text='Wykres zespolony', command=self.draw_united_data_clicked_tab_2)
         self.united_chart_button_tab_2.grid(row=2, column=0, padx=10)
 
         self.label = ttk.Label(lf303)
         self.label.grid(row=3, column=0)
 
 
-        self.open_button_tab_2 = ttk.Button(lf303, text='Export danych', command=self.get_data_button_clicked_tab_1)
+        self.open_button_tab_2 = ttk.Button(lf303, text='Export danych', command=self.data_export_clicked_tab_2)
         self.open_button_tab_2.grid(row=4, column=0, padx=10)
 
 
@@ -608,6 +608,19 @@ class View(ttk.Frame):
         self.controller.trans_06_tab_2()
 
     ####################################################################################################################################
+
+    def aggregation_united_data_clicked_tab_2(self):
+        print ("aggregacja")
+    def draw_united_data_clicked_tab_2(self):
+        self.controller.united_chart_execution_tab_2()
+
+    def data_export_clicked_tab_2(self):
+        print("export")
+
+
+#######################################################################################################################################
+
+
 
     def show_error(self, message):
         """
