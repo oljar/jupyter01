@@ -10,6 +10,7 @@ import numpy.polynomial.polynomial as poly
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+from datetime import datetime
 
 
 
@@ -19,26 +20,54 @@ class Controller:
         self.model = model
         self.view = view
 
+        self.temporary_chart_1_data = 0
+        self.temporary_chart_2_data = 0
+        self.temporary_chart_3_data = 0
+        self.temporary_chart_4_data = 0
+        self.temporary_chart_5_data = 0
+        self.temporary_chart_6_data = 0
+
+
     def open_data(self):
 
+        if  isinstance(self.model.time_var_tab1, str):
 
 
-        try:
-            self.model.name = self.view.open_name_var.get()
-            self.model.x_var = (self.view.x_var.get())
-            self.model.y_var = (self.view.y_var.get())
-            self.model.x_math_form.set(self.view.x_math_form.get())
-            self.model.y_math_form.set(self.view.y_math_form.get())
+            try:
+                self.view.x_var.set(self.view.y1_var_tab1.get())
+                self.view.y_var.set(self.view.y2_var_tab1.get())
+
+                self.model.x_var = (self.view.x_var.get())
+                self.model.y_var = (self.view.y_var.get())
+                self.df1 = pd.DataFrame()
+                self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+                self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+                self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+
+                print(self.df1)
+
+            except ValueError as error:
+                # show an error message
+                self.view.show_error(error)
+
+        else:
+
+
+            try:
+                self.model.name = self.view.open_name_var.get()
+
+                self.model.x_var = (self.view.x_var.get())
+                self.model.y_var = (self.view.y_var.get())
 
 
 
-            self.df0 = self.model.open_data()
+                self.df1 = self.model.open_data()
 
-            print(self.df0)
+                print(self.df1)
 
-        except ValueError as error:
-            # show an error message
-            self.view.show_error(error)
+            except ValueError as error:
+                # show an error message
+                self.view.show_error(error)
 
 
 
@@ -46,9 +75,14 @@ class Controller:
     def counter(self):
 
 
+
+
         self.x_exam_pts_basic = []
         self.y_exam_pts_basic = []
 
+
+        self.model.x_math_form.set(self.view.x_math_form.get())
+        self.model.y_math_form.set(self.view.y_math_form.get())
 
 
         # examinated points
@@ -61,7 +95,7 @@ class Controller:
 
 
 
-        df1 = self.df0
+        df1 = self.df1
         df1 = df1.sort_values(by=x_tag, ascending=True)
 
         df1 = df1[df1[x_tag] >= 0]
@@ -70,6 +104,8 @@ class Controller:
 
         df1[x_tag] = df1[x_tag].fillna(df1[x_tag].median())
         df1[y_tag] = df1[y_tag].fillna(df1[y_tag].median())
+
+
 
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
@@ -308,7 +344,7 @@ class Controller:
 
 
 
-    def natural_chart_execution(self):
+    def natural_chart_execution_tab_0(self):
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
@@ -324,12 +360,7 @@ class Controller:
 
         chart(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
 
-
-
-
-
-
-    def modified_chart_execution(self):
+    def modyfied_chart_execution_tab_0(self):
         def chart(x, y, x_trend, y_trend):
             fig = plt.figure()
             ax1 = fig.add_subplot(111)
@@ -344,15 +375,16 @@ class Controller:
 
         chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
-    def save_data(self):
-        solution = pd.DataFrame()
-        solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
-        solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
-        self.view.show_save_file_clicked()
 
-        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
-    def save_nature_data(self):
+
+    def export_nature_data_tab_0(self):
+        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
+
+
+
+
+    def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_basic)
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_basic)
@@ -361,7 +393,7 @@ class Controller:
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
 
 
-    def save_modify_data(self):
+    def save_modify_data_tab_0(self):
         solution = pd.DataFrame()
         solution[self.view.x_var.get()] = pd.DataFrame(self.x_exam_pts_4)
         solution[self.view.y_var.get()] = pd.DataFrame(self.y_exam_pts_4)
@@ -371,13 +403,159 @@ class Controller:
 
 
 
+    def export_modyfied_data_tab_0(self):
+        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
+
+
+
+
 ######################################################################################################################
+#tab_1
 ######################################################################################################################
 
     def open_data_tab_1(self):
 
-        self.df1 = self.model.open_data()
+
+        self.model.name = self.view.open_name_var.get()
+        self.model.time_var_tab1 =  self.view.time_var_tab1.get()
+        self.model.y1_var_tab1 = self.view.y1_var_tab1.get()
+        self.model.y2_var_tab1 = self.view.y2_var_tab1.get()
+        self.df11 = self.model.open_data_tab_1()
+
+
+        time_tag_tab1 = self.model.time_var_tab1
+        y1_tag_tab1 = str(self.model.y1_var_tab1)
+        y2_tag_tab1 = str(self.model.y2_var_tab1)
+
+
+        df11 = self.df11
+        df11 = df11.sort_values(by=time_tag_tab1, ascending=True)
+
+        df11 = df11[df11[y1_tag_tab1] >= 0]
+        df11 = df11[df11[y2_tag_tab1] >= 0]
+
+        df11[y1_tag_tab1] = df11[y1_tag_tab1].fillna(df11[y1_tag_tab1].median())
+        df11[y2_tag_tab1] = df11[y2_tag_tab1].fillna(df11[y2_tag_tab1].median())
+
+
+        self.time_tab1_exam_pts = df11[time_tag_tab1].tolist()  # definition of column - time
+        self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
+        self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
 
 
+
+    def draw_data_tab_1(self):
+
+        def chart(x, y1, y2):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y1, "-o")
+            ax1.plot(x, y2, "-s")
+
+            ax2.set_xlim(0, 100)
+            plt.gcf().autofmt_xdate()
+            ax1.set_xticks(np.arange(-5, 200, 10))
+            plt.show()
+
+        chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
+
+    def set_data_tab_1(self):
+        #self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
+        #self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
+
+        self.model.down_scope_var_tab_1 = str(self.view.down_scope_var_tab_1.get())
+        self.model.up_scope_var_tab_1 = str(self.view.up_scope_var_tab_1.get())
+
+
+        df101 = pd.DataFrame(self.model.open_data_tab_1())
+        df101 = df101.loc[:,[self.model.time_var_tab1,self.model.y1_var_tab1,self.model.y2_var_tab1]]
+
+        df101 = df101[(df101[self.model.time_var_tab1] > (self.model.down_scope_var_tab_1)) & (df101[self.model.time_var_tab1] < self.model.up_scope_var_tab_1)]
+
+        #df101 = df101[df101[self.model.time_var_tab1].between_time(self.model.down_scope_var_tab_1, self.model.up_scope_var_tab_1)]
+        #
+        self.time_modyfied_tab1_exam_pts = (df101[self.model.time_var_tab1]).tolist()
+        self.y1_modyfied_tab1_exam_pts = (df101[self.model.y1_var_tab1]).tolist()
+        self.y2_modyfied_tab1_exam_pts = (df101[self.model.y2_var_tab1]).tolist()
+        #
+
+
+
+
+    def draw_slice_data_tab_1(self):
+
+        def chart(x, y1, y2):
+            fig = plt.figure()
+            ax1 = fig.add_subplot(111)
+            ax2 = ax1.twiny()
+
+            ax1.plot(x, y1, "-o")
+            ax1.plot(x, y2, "-s")
+
+            ax2.set_xlim(0, 100)
+            plt.gcf().autofmt_xdate()
+            ax1.set_xticks(np.arange(-5, 200, 10))
+            plt.show()
+
+        chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
+
+    def save_modyfied_data_clicked_tab_1(self):
+        solution = pd.DataFrame()
+        solution[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+        solution[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+        solution[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+
+        self.view.show_save_file_clicked()
+
+        solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=False)
+
+
+
+
+#########################################################################################################################
+#tab2
+########################################################################################################################
+    def trans_01_tab_2(self):
+        self.temporary_chart_1_data =  self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_1_data)
+
+
+
+    def trans_02_tab_2(self):
+        self.temporary_chart_2_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_2_data)
+
+    def trans_03_tab_2(self):
+        self.temporary_chart_3_data = self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_3_data)
+
+
+    def trans_04_tab_2(self):
+        self.temporary_chart_4_data =  self.export_nature_data_tab_0()
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
+        #print(self.temporary_chart_4_data)
+
+    def trans_05_tab_2(self):
+        self.temporary_chart_5_data = self.export_nature_data_tab_0()
+
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
+        # print(self.temporary_chart_5_data)
+
+    def trans_06_tab_2(self):
+        self.temporary_chart_6_data =  self.export_nature_data_tab_0()
+
+        if self.view.switch_modyfied_export == True:
+            self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
+       # print(self.temporary_chart_6_data)
 

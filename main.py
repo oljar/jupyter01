@@ -20,9 +20,8 @@ class Application(tk.Frame):
 view = View(V.window)
 
 
-name = view.open_name_var.get()
-name_tab_1 = view.open_name_var_tab_1.get()
 
+name = tk.StringVar()
 dist_border = tk.StringVar()
 dens_factor = tk.StringVar()
 modify_down_scope = tk.StringVar()
@@ -39,24 +38,18 @@ step = tk.StringVar()
 time_var_tab1 = tk.StringVar()
 y1_var_tab1 = tk.StringVar()
 y2_var_tab1 = tk.StringVar()
-up_scope_var_tab_1 =  tk.StringVar()
 down_scope_var_tab_1 = tk.StringVar()
+up_scope_var_tab_1 =  tk.StringVar()
 
 
 
-
-model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_var,y_var,x_math_form,y_math_form,
-              polynominal_degree,  limit_up_scope, limit_down_scope, step, time_var_tab1, y1_var_tab1, y2_var_tab1,
-              up_scope_var_tab_1, down_scope_var_tab_1)
-
-
-
-
-
+model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_var,y_var,x_math_form,y_math_form,polynominal_degree, limit_down_scope, limit_up_scope
+              ,step, time_var_tab1, y1_var_tab1, y2_var_tab1, down_scope_var_tab_1, up_scope_var_tab_1)
 
 
 
 controller = Controller(model, view)
+
 
 
 # set the controller to view
@@ -64,8 +57,11 @@ view.set_controller(controller)
 
 
 
+
+
 V.tab_parent.add(V.tab1,text = 'zakres')
 V.tab_parent.add(V.tab0,text = 'ustawienia')
+V.tab_parent.add(V.tab2,text = 'agregacja')
 
 
 V.tab_parent.pack(expand = 1, fill = 'both')
