@@ -5,7 +5,11 @@ import csv
 
 class Model:
     def __init__(self, name, dist_border, dens_factor, modify_down_scope, modify_up_scope, x_var, y_var, x_math_form, y_math_form, polynominal_degree,limit_up_scope,limit_down_scope,step,
-                 time_var_tab1,y1_var_tab1,y2_var_tab1,down_scope_var_tab_1,up_scope_var_tab_1):
+                 time_var_tab1,y1_var_tab1,y2_var_tab1,down_scope_var_tab_1,up_scope_var_tab_1,
+                 name_of_chart_var,
+                 name_of_X_axis_var, unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
+                 name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var ):
+
         self.name = name
 
         self.dist_border = dist_border
@@ -28,6 +32,19 @@ class Model:
         self.down_scope_var_tab_1 = down_scope_var_tab_1
         self.up_scope_var_tab_1 = up_scope_var_tab_1
 
+        self.name_of_chart_var = name_of_chart_var
+
+        self.name_of_X_axis_var  = name_of_X_axis_var
+        self.unit_of_X_axis_var = unit_of_X_axis_var
+        self.scope_min_of_X_axis_var = scope_min_of_X_axis_var
+        self.scope_max_of_X_axis_var = scope_max_of_X_axis_var
+
+
+
+        self.name_of_Y_axis_var  = name_of_Y_axis_var
+        self.unit_of_Y_axis_var = unit_of_Y_axis_var
+        self.scope_min_of_Y_axis_var = scope_min_of_Y_axis_var
+        self.scope_max_of_Y_axis_var = scope_max_of_Y_axis_var
 
 
 
