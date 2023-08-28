@@ -378,12 +378,25 @@ class Controller:
 
 
     def export_nature_data_tab_0(self):
-        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
-               # [self.model.name_of_chart_var,
-               # self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
-               # self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
-               # self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
-               # self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var])
+
+        self.model.name_of_chart_var = self.view.name_of_chart_var.get()
+
+        self.model.name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        self.model.unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
+        self.model.scope_min_of_X_axis_var = self.view.scope_min_of_X_axis_var.get()
+        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get
+
+        self.model.name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
+        self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
+        self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
+
+        return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
+               self.model.name_of_chart_var,
+               self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
+               self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
+               self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+               self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var)
 
 
 
@@ -409,15 +422,29 @@ class Controller:
 
 
     def export_modyfied_data_tab_0(self):
-        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
-               # [self.model.name_of_chart_var,
-               # self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
-               # self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
-               # self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
-               # self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var])
+
+        self.model.name_of_chart_var = self.view.name_of_chart_var.get()
+
+        self.model.name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        self.model.unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
+        self.model.scope_min_of_X_axis_var = self.view.scope_min_of_X_axis_var.get()
+        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get
+
+        self.model.name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
+        self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
+        self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
+
+        return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
+                self.model.name_of_chart_var,
+                self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
+                self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
+                self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+                self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var)
 
 
-######################################################################################################################
+
+        ######################################################################################################################
 #tab_1
 ######################################################################################################################
 
@@ -599,7 +626,13 @@ class Controller:
 
     def save_data_clicked_tab_2(self):
         solution = pd.DataFrame()
-        solution[self.view.x_var.get()] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
+
+        solution[str((self.agg_tab_2()[0])[5])] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
+        solution[str((self.agg_tab_2()[0])[9])] = pd.DataFrame(((self.agg_tab_2()[0])[1]))
+        solution[str((self.agg_tab_2()[1])[5])] = pd.DataFrame(((self.agg_tab_2()[1])[0]))
+        solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame(((self.agg_tab_2()[1])[1]))
+
+
 
 
 
