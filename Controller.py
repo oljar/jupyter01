@@ -629,9 +629,10 @@ class Controller:
 
         solution[str((self.agg_tab_2()[0])[5])] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
         solution[str((self.agg_tab_2()[0])[9])] = pd.DataFrame(((self.agg_tab_2()[0])[1]))
-        solution[str((self.agg_tab_2()[1])[5])] = pd.DataFrame(((self.agg_tab_2()[1])[0]))
-        solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame(((self.agg_tab_2()[1])[1]))
+        solution[str((self.agg_tab_2()[1])[5])] = pd.DataFrame((self.agg_tab_2()[1])[0])
+        solution[str((self.agg_tab_2()[1])[9])] = pd.DataFrame((self.agg_tab_2()[1])[1])
 
+        print(solution)
 
 
 
