@@ -553,7 +553,7 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf302, text='zakres - max')
         self.label.grid(row=70, column=1)
 
-        self.scope_max_of_X_axis = ttk.Entry(lf302, textvariable=self.scope_max_of_Y_axis_var, width=10)
+        self.scope_max_of_X_axis = ttk.Entry(lf302, textvariable=self.scope_max_of_X_axis_var, width=10)
         self.scope_max_of_X_axis.grid(row=70, column=2, sticky=tk.W)
 
         ##########################################################################################################################################
@@ -673,8 +673,9 @@ class View(ttk.Frame):
 
 
     def export_modyfied_button_clicked_tab_0(self):
-        self.controller.export_modyfied_data_tab_0()
         self.switch_modyfied_export = True
+        self.controller.export_modyfied_data_tab_0()
+
 
 
 #####################################################################################################################

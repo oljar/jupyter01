@@ -379,6 +379,12 @@ class Controller:
 
     def export_nature_data_tab_0(self):
         return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
+               # [self.model.name_of_chart_var,
+               # self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
+               # self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
+               # self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+               # self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var])
+
 
 
 
@@ -404,8 +410,11 @@ class Controller:
 
     def export_modyfied_data_tab_0(self):
         return(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
-
-
+               # [self.model.name_of_chart_var,
+               # self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
+               # self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
+               # self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
+               # self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var])
 
 
 ######################################################################################################################
@@ -413,6 +422,7 @@ class Controller:
 ######################################################################################################################
 
     def open_data_tab_1(self):
+
 
 
         self.model.name = self.view.open_name_var.get()
@@ -521,7 +531,10 @@ class Controller:
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_1_data)
+            # print(len(self.temporary_chart_1_data[0]))
+            # print(len(self.temporary_chart_1_data[1]))
+            # print(len(self.temporary_chart_1_data[2]))
+            # print(len(self.temporary_chart_1_data[3]))
 
 
 
@@ -529,50 +542,21 @@ class Controller:
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_2_data)
-
-    def trans_03_tab_2(self):
-        self.temporary_chart_3_data = self.export_nature_data_tab_0()
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_3_data)
+            # print(len(self.temporary_chart_2_data[0]))
+            # print(len(self.temporary_chart_2_data[1]))
+            # print(len(self.temporary_chart_2_data[2]))
+            # print(len(self.temporary_chart_2_data[3]))
 
 
-    def trans_04_tab_2(self):
-        self.temporary_chart_4_data =  self.export_nature_data_tab_0()
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
-        #print(self.temporary_chart_4_data)
-
-    def trans_05_tab_2(self):
-        self.temporary_chart_5_data = self.export_nature_data_tab_0()
-
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
-        # print(self.temporary_chart_5_data)
-
-    def trans_06_tab_2(self):
-        self.temporary_chart_6_data =  self.export_nature_data_tab_0()
-
-        if self.view.switch_modyfied_export == True:
-            self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
-       # print(self.temporary_chart_6_data)
 
 
     def agg_tab_2(self):
         agg = []
         if self.temporary_chart_1_data != 0 :
-            agg.append(pd.DataFrame(self.temporary_chart_1_data))
+            agg.append(self.temporary_chart_1_data)
         if self.temporary_chart_2_data != 0:
-            agg.append(pd.DataFrame(self.temporary_chart_2_data))
-        if self.temporary_chart_3_data != 0:
-            agg.append(pd.DataFrame(self.temporary_chart_3_data))
-        if self.temporary_chart_4_data != 0:
-            agg.append(pd.DataFrame(self.temporary_chart_4_data))
-        if self.temporary_chart_5_data != 0:
-            agg.append(pd.DataFrame(self.temporary_chart_5_data))
-        if self.temporary_chart_6_data != 0:
-            agg.append(pd.DataFrame(self.temporary_chart_6_data))
+            agg.append(self.temporary_chart_2_data)
+
 
         return agg
 
@@ -598,19 +582,38 @@ class Controller:
 
             plt.show()
 
-        chart(self.agg_tab_2()[0][0],self.agg_tab_2()[0][1],self.agg_tab_2()[0][2],self.agg_tab_2()[0][3],
-              self.agg_tab_2()[1][0],self.agg_tab_2()[1][1],self.agg_tab_2()[1][2],self.agg_tab_2()[1][3])
+        chart((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
+              (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
+        # print((self.agg_tab_2()[0])[0])
+        # print((self.agg_tab_2()[0])[1])
+        # print((self.agg_tab_2()[0])[2])
+        # print((self.agg_tab_2()[0])[3])
+        #
+        # print((self.agg_tab_2()[1])[0])
+        # print((self.agg_tab_2()[1])[1])
+        # print((self.agg_tab_2()[1])[2])
+        # print((self.agg_tab_2()[1])[3])
+
 
 
 
     def save_data_clicked_tab_2(self):
         solution = pd.DataFrame()
-        # solution[self.model.time_var_tab1] = self.agg_tab_2()[0][0]
-        # solution[self.model.y1_var_tab1] = self.agg_tab_2()[0][1]
-        # solution[self.model.y2_var_tab1] = self.agg_tab_2()[0][2]
-        # solution[] =
-        solution = pd.DataFrame(list(self.agg_tab_2()))
+        solution[self.view.x_var.get()] = pd.DataFrame(((self.agg_tab_2()[0])[0]))
 
+
+
+
+        #
+        # solution[self.model.y1_var_tab1] = (self.agg_tab_2()[0])[0]
+        #
+        # solution[self.model.y2_var_tab1] = (self.agg_tab_2()[0])[1]
+
+
+        # solution = pd.DataFrame(list(self.agg_tab_2()))
+
+        # print((self.agg_tab_2()[0])[0])
+        # print((self.agg_tab_2()[0])[1])
 
 
 
