@@ -426,7 +426,10 @@ class View(ttk.Frame):
         self.set_button_count_tab_1.grid(row=20, column=0, padx=10)
 
         self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Rysuj wykres', command=self.draw_slice_button_clicked_tab_1)
-        self.draw_slice_button_count_tab_1.grid(row=20, column=2, padx=10)
+        self.draw_slice_button_count_tab_1.grid(row=20, column=1, padx=10)
+
+        self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Export',command=self.export_clicked_tab_1)
+        self.draw_slice_button_count_tab_1.grid(row=20, column=3, padx=10)
 
         self.save_button_tab_1 = ttk.Button(lf102, text='Zapisz', command=self.save_modyfied_data_clicked_tab_1)
         self.save_button_tab_1.grid(row=20, column=4, padx=10)
@@ -712,6 +715,9 @@ class View(ttk.Frame):
 
     def draw_slice_button_clicked_tab_1(self):
         self.controller.draw_slice_data_tab_1()
+
+    def export_clicked_tab_1(self):
+        self.controller.export_to_tab_0()
 
     def save_modyfied_data_clicked_tab_1(self):
         self.controller.save_modyfied_data_clicked_tab_1()
