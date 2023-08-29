@@ -30,44 +30,55 @@ class Controller:
 
     def open_data(self):
 
-        if  isinstance(self.model.time_var_tab1, str):
-
-
-            try:
-                self.view.x_var.set(self.view.y1_var_tab1.get())
-                self.view.y_var.set(self.view.y2_var_tab1.get())
-
-                self.model.x_var = (self.view.x_var.get())
-                self.model.y_var = (self.view.y_var.get())
-                self.df1 = pd.DataFrame()
-                self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
-                self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
-                self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
-
-                print(self.df1)
-
-            except ValueError as error:
-                # show an error message
-                self.view.show_error(error)
-
-        else:
-
-
-            try:
-                self.model.name = self.view.open_name_var.get()
-
-                self.model.x_var = (self.view.x_var.get())
-                self.model.y_var = (self.view.y_var.get())
 
 
 
-                self.df1 = self.model.open_data()
 
-                print(self.df1)
+            #     self.view.x_var.set(self.view.y1_var_tab1.get())
+            #     self.view.y_var.set(self.view.y2_var_tab1.get())
+            #
+            #     self.model.x_var = (self.view.x_var.get())
+            #     self.model.y_var = (self.view.y_var.get())
+            #     self.df1 = pd.DataFrame()
+            #     self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+            #     self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+            #     self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+            #
+            #     print(self.df1)
+            #
 
-            except ValueError as error:
-                # show an error message
-                self.view.show_error(error)
+
+
+
+
+
+        self.model.name = self.view.open_name_var.get()
+
+        self.model.x_var = (self.view.x_var.get())
+        self.model.y_var = (self.view.y_var.get())
+
+
+
+        self.df1 = self.model.open_data()
+
+        print(self.df1)
+
+
+
+    def export_to_tab_0(self):
+
+            self.view.x_var.set(self.view.y1_var_tab1.get())
+            self.view.y_var.set(self.view.y2_var_tab1.get())
+
+            self.model.x_var = (self.view.x_var.get())
+            self.model.y_var = (self.view.y_var.get())
+            self.df1 = pd.DataFrame()
+            self.df1[self.model.time_var_tab1] = pd.DataFrame(self.time_modyfied_tab1_exam_pts)
+            self.df1[self.model.y1_var_tab1] = pd.DataFrame(self.y1_modyfied_tab1_exam_pts)
+            self.df1[self.model.y2_var_tab1] = pd.DataFrame(self.y2_modyfied_tab1_exam_pts)
+
+            print(self.df1)
+#
 
 
 
@@ -498,6 +509,8 @@ class Controller:
 
         chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts , self.y2_tab1_exam_pts)
 
+
+
     def set_data_tab_1(self):
         #self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
         #self.model.up_scope_var_tab_1 = datetime.strptime(str(self.view.up_scope_var_tab_1.get()),"%H:%M:%S").time()
@@ -537,6 +550,7 @@ class Controller:
             plt.show()
 
         chart( self.time_modyfied_tab1_exam_pts ,  self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
+        self.export_to_tab_0()
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
