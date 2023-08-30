@@ -607,7 +607,6 @@ class Controller:
 
 
 
-
     def united_chart_execution_tab_2(self):
         print(f'długość{len(self.agg_tab_2())}')
         print((self.agg_tab_2()[0])[13])
