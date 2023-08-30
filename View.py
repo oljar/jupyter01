@@ -74,6 +74,10 @@ class View(ttk.Frame):
         self.scope_min_of_Y_axis_var = tk.StringVar()
         self.scope_max_of_Y_axis_var = tk.StringVar()
 
+        self.name_serial_var = tk.StringVar()
+
+
+
 
 
 
@@ -133,6 +137,15 @@ class View(ttk.Frame):
 
         self.name_col_y_entry = ttk.Entry(lf1, textvariable=self.y_var, width=10)
         self.name_col_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
+
+        self.distance_label = ttk.Label(lf1, text='nazwa serii')
+        self.distance_label.grid(row=20, column=4)
+
+        self.name_serial_entry = ttk.Entry(lf1, textvariable=self.name_serial_var, width=35)
+        self.name_serial_entry.grid(row=20, column=5, sticky=tk.NSEW)
+
+
+
 
 
         #############################################################

@@ -401,13 +401,15 @@ class Controller:
         self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
         self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
+        self.model.name_serial_var = self.view.name_serial_var.get()
 
         return(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
                self.model.name_of_chart_var,
                self.model.name_of_X_axis_var,self.model.unit_of_X_axis_var,
                self.model.scope_min_of_X_axis_var,self.model.scope_max_of_X_axis_var,
                self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
-               self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var)
+               self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
+               self.model.name_serial_var)
 
 
 
@@ -451,7 +453,8 @@ class Controller:
                 self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
-                self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var)
+                self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
+                self.model.name_serial_var)
 
 
 
@@ -607,6 +610,9 @@ class Controller:
 
     def united_chart_execution_tab_2(self):
         print(f'długość{len(self.agg_tab_2())}')
+        print((self.agg_tab_2()[0])[13])
+
+        print((self.agg_tab_2()[1])[13])
 
         def chart(x, y, x_trend, y_trend,x1,y1,x1_trend,y1_trend):
             fig = plt.figure()
@@ -625,9 +631,13 @@ class Controller:
 
         chart((self.agg_tab_2()[0])[0],(self.agg_tab_2()[0])[1],(self.agg_tab_2()[0])[2],(self.agg_tab_2()[0])[3],
               (self.agg_tab_2()[1])[0],(self.agg_tab_2()[1])[1],(self.agg_tab_2()[1])[2],(self.agg_tab_2()[1])[3])
+
+
+
+
         # print((self.agg_tab_2()[0])[0])
         # print((self.agg_tab_2()[0])[1])
-        # print((self.agg_tab_2()[0])[2])
+        # print((self.agg_tab_2()[0])[2])`
         # print((self.agg_tab_2()[0])[3])
         #
         # print((self.agg_tab_2()[1])[0])
