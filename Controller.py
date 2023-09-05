@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 from datetime import datetime
-import numpy as np;
+import numpy as np
+import datetime as dt
 
 np.random.seed(42)
 import matplotlib.pyplot as plt
@@ -278,48 +279,54 @@ class Controller:
         self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4 = main_proces(x_exam_pts_3,
                                                                                                    y_exam_pts_3)
 
-    # def natural_chart_execution_tab_0(self):
-    #     def chart(x, y, x_trend, y_trend):
-    #         fig = plt.figure()
-    #         ax1 = fig.add_subplot(111)
-    #         ax2 = ax1.twiny()
-    #
-    #         ax1.plot(x, y, "-o")
-    #         ax1.plot(x_trend, y_trend, "-s")
-    #
-    #         ax2.set_xlim(0, 100)
-    #
-    #         plt.show()
-    #
-    #     chart(self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1)
-    solist = []
 
     def natural_chart_execution_tab_0(self):
-        self.chart1(self.agg_tab_2())
+
+        name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
+
+
+        name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
 
 
 
 
 
+        aux_list = [[self.x_exam_pts_basic,self.y_exam_pts_basic,self.x_trend_pts_1,self.y_trend_pts_1,
+                    '',name_of_X_axis_var,unit_of_X_axis_var,'','',name_of_Y_axis_var,unit_of_Y_axis_var,'','','']]
 
 
+        self.chart1(aux_list)
 
 
 
     def modyfied_chart_execution_tab_0(self):
-        def chart(x, y, x_trend, y_trend):
-            fig = plt.figure()
-            ax1 = fig.add_subplot(111)
-            ax2 = ax1.twiny()
+        # def chart(x, y, x_trend, y_trend):
+        #     fig = plt.figure()
+        #     ax1 = fig.add_subplot(111)
+        #     ax2 = ax1.twiny()
+        #
+        #     ax1.plot(x, y, "-o")
+        #     ax1.plot(x_trend, y_trend, "-s")
+        #
+        #     ax2.set_xlim(0, 100)
+        #
+        #     plt.show()
+        #
+        # chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
 
-            ax1.plot(x, y, "-o")
-            ax1.plot(x_trend, y_trend, "-s")
+        name_of_X_axis_var = self.view.name_of_X_axis_var.get()
+        unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
 
-            ax2.set_xlim(0, 100)
+        name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
+        unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
 
-            plt.show()
+        aux_list = [[self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
+                     '', name_of_X_axis_var, unit_of_X_axis_var, '', '', name_of_Y_axis_var, unit_of_Y_axis_var, '', '',
+                     '']]
 
-        chart(self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4)
+        self.chart1(aux_list)
 
     def export_nature_data_tab_0(self):
 
@@ -328,7 +335,7 @@ class Controller:
         self.model.name_of_X_axis_var = self.view.name_of_X_axis_var.get()
         self.model.unit_of_X_axis_var = self.view.unit_of_X_axis_var.get()
         self.model.scope_min_of_X_axis_var = self.view.scope_min_of_X_axis_var.get()
-        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get
+        self.model.scope_max_of_X_axis_var = self.view.scope_max_of_X_axis_var.get()
 
         self.model.name_of_Y_axis_var = self.view.name_of_Y_axis_var.get()
         self.model.unit_of_Y_axis_var = self.view.unit_of_Y_axis_var.get()
@@ -412,22 +419,45 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
+
+
+
+
+    def chart(self,x, y1, y2):
+        fig = plt.figure()
+        ax1 = fig.add_subplot(111)
+
+
+        ax1.scatter(x, y1, s=20,c="lightblue", alpha= 0.5)
+        ax1.scatter(x, y2,  s=20,c="orange", alpha= 0.5)
+
+
+        plt.gcf().autofmt_xdate()
+
+        print(x[len(x)-1])
+        print (x[0])
+
+        range_time = 200
+        ts = x[0]
+        print (int(ts))
+        timedeltaObj = dt.datetime.strptime(x[0], "%H:%M:%S") - dt.datetime(1900, 1, 1)
+        print(timedeltaObj)
+        ax1.set_xticks(np.arange(-5, range_time, 30))
+
+        # Show the major grid and style it slightly.
+        ax1.grid(which='major', color='#DDDDDD', linewidth=1.2)
+        # Show the minor grid as well. Style it in very light gray as a thin,
+        # dotted line.
+        ax1.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=1)
+        # Make the minor ticks and gridlines show.
+        ax1.minorticks_on()
+        plt.show()
+
     def draw_data_tab_1(self):
-
-        def chart(x, y1, y2):
-            fig = plt.figure()
-            ax1 = fig.add_subplot(111)
-            ax2 = ax1.twiny()
-
-            ax1.plot(x, y1, "-o")
-            ax1.plot(x, y2, "-s")
-
-            ax2.set_xlim(0, 100)
-            plt.gcf().autofmt_xdate()
-            ax1.set_xticks(np.arange(-5, 200, 10))
-            plt.show()
-
-        chart(self.time_tab1_exam_pts, self.y1_tab1_exam_pts, self.y2_tab1_exam_pts)
+        time_tab1_exam_pts = self.time_tab1_exam_pts
+        y1_tab1_exam_pts = self.y1_tab1_exam_pts
+        y2_tab1_exam_pts = self.y2_tab1_exam_pts
+        self.chart(time_tab1_exam_pts,y1_tab1_exam_pts,y2_tab1_exam_pts)
 
     def set_data_tab_1(self):
         # self.model.down_scope_var_tab_1 = datetime.strptime(str(self.view.down_scope_var_tab_1.get()),"%H:%M:%S").time()
@@ -450,22 +480,15 @@ class Controller:
         #
 
     def draw_slice_data_tab_1(self):
+        time_modyfied_tab1_exam_pts = self.time_modyfied_tab1_exam_pts
+        y1_modyfied_tab1_exam_pts = self.y1_modyfied_tab1_exam_pts
+        y2_modyfied_tab1_exam_pts = self.y2_modyfied_tab1_exam_pts
 
-        def chart(x, y1, y2):
-            fig = plt.figure()
-            ax1 = fig.add_subplot(111)
-            ax2 = ax1.twiny()
 
-            ax1.plot(x, y1, "-o")
-            ax1.plot(x, y2, "-s")
 
-            ax2.set_xlim(0, 100)
-            plt.gcf().autofmt_xdate()
-            ax1.set_xticks(np.arange(-5, 200, 10))
-            plt.show()
 
-        chart(self.time_modyfied_tab1_exam_pts, self.y1_modyfied_tab1_exam_pts, self.y2_modyfied_tab1_exam_pts)
-        self.export_to_tab_0()
+        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts)
+
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
@@ -534,22 +557,22 @@ class Controller:
         num_li = len(solist)
 
         if num_li == 1 or num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
-            x, y, x_trend, y_trend, name_serial_var = (solist[0])[0], (solist[0])[1], (solist[0])[2], (solist[0])[3], (self.agg_tab_2()[0])[13]
+            x, y, x_trend, y_trend, name_serial_var = (solist[0])[0], (solist[0])[1], (solist[0])[2], (solist[0])[3], (solist[0])[13]
             sns.scatterplot(x=x, y=y, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var)
             sns.lineplot(x=x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label=name_serial_var)
 
         if num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
-            x1, y1, x1_trend, y1_trend, name_serial_var1 = (solist[1])[0], (solist[1])[1], (solist[1])[2],(solist[1])[3], (self.agg_tab_2()[1])[13]
+            x1, y1, x1_trend, y1_trend, name_serial_var1 = (solist[1])[0], (solist[1])[1], (solist[1])[2],(solist[1])[3], (solist[1])[13]
             sns.scatterplot(x=x1, y=y1, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var1)
             sns.lineplot(x=x1_trend, y=y1_trend, color="g", ax=ax, linewidth=1, label=name_serial_var1)
 
         if num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
-            x2, y2, x2_trend, y2_trend, name_serial_var2 = (solist[2])[0], (solist[2])[1], (solist[2])[2],(solist[2])[3], (self.agg_tab_2()[2])[13]
+            x2, y2, x2_trend, y2_trend, name_serial_var2 = (solist[2])[0], (solist[2])[1], (solist[2])[2],(solist[2])[3], (solist[2])[13]
             sns.scatterplot(x=x2, y=y2, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var2)
             sns.lineplot(x=x2_trend, y=y2_trend, color="g", ax=ax, linewidth=1, label=name_serial_var2)
 
         if num_li == 4 or num_li == 5 or num_li == 6:
-            x3, y3, x3_trend, y3_trend, name_serial_var3 = (solist[3])[0], (solist[3])[1], (solist[3])[2],(solist[3])[3], (self.agg_tab_2()[3])[13]
+            x3, y3, x3_trend, y3_trend, name_serial_var3 = (solist[3])[0], (solist[3])[1], (solist[3])[2],(solist[3])[3], (solist[3])[13]
             sns.scatterplot(x=x3, y=y3, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var3)
             sns.lineplot(x=x3_trend, y=y3_trend, color="g", ax=ax, linewidth=1, label=name_serial_var3)
 
