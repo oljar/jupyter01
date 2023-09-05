@@ -439,8 +439,8 @@ class Controller:
 
         range_time = 200
         ts = x[0]
-        print (int(ts))
-        timedeltaObj = dt.datetime.strptime(x[0], "%H:%M:%S") - dt.datetime(1900, 1, 1)
+        print ((ts))
+        timedeltaObj = dt.datetime.strptime(x[0], "%H:%M:%S") - dt.datetime.strptime(x[len(x)-1], "%H:%M:%S")
         print(timedeltaObj)
         ax1.set_xticks(np.arange(-5, range_time, 30))
 
