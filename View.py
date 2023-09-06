@@ -79,6 +79,11 @@ class View(ttk.Frame):
         self.scale_time_chart = tk.StringVar()
 
         self.is_on_canal_01 = True
+        self.is_on_canal_02 = True
+        self.is_on_canal_03 = True
+        self.is_on_canal_04 = True
+        self.is_on_canal_05 = True
+        self.is_on_canal_06 = True
 
 
 
@@ -486,19 +491,19 @@ class View(ttk.Frame):
         self.open_button_chart_01_tab_2.grid(row=0, column=0, padx=10)
 
 
-        self.open_button_chart_02_tab_2 = ttk.Button(lf301, text='02 Otwarty', command=self.data_trans_chart_02_tab_2)
+        self.open_button_chart_02_tab_2 = ttk.Button(lf301, text='02 Otwarty', command=self.canal_02)
         self.open_button_chart_02_tab_2.grid(row=0, column=1, padx=10)
 
-        self.open_button_chart_03_tab_2 = ttk.Button(lf301, text='03 Otwarty', command=self.data_trans_chart_03_tab_2)
+        self.open_button_chart_03_tab_2 = ttk.Button(lf301, text='03 Otwarty', command=self.canal_03)
         self.open_button_chart_03_tab_2.grid(row=0, column=3, padx=10)
 
-        self.open_button_chart_04_tab_2 = ttk.Button(lf301, text='04 Otwarty', command=self.data_trans_chart_04_tab_2)
+        self.open_button_chart_04_tab_2 = ttk.Button(lf301, text='04 Otwarty', command=self.canal_04)
         self.open_button_chart_04_tab_2.grid(row=0, column=4, padx=10)
 
-        self.open_button_chart_05_tab_2 = ttk.Button(lf301, text='05 Otwarty', command=self.data_trans_chart_05_tab_2)
+        self.open_button_chart_05_tab_2 = ttk.Button(lf301, text='05 Otwarty', command=self.canal_05)
         self.open_button_chart_05_tab_2.grid(row=0, column=5, padx=10)
 
-        self.open_button_chart_06_tab_2 = ttk.Button(lf301, text='06 Otwarty', command=self.data_trans_chart_06_tab_2)
+        self.open_button_chart_06_tab_2 = ttk.Button(lf301, text='06 Otwarty', command=self.canal_06)
         self.open_button_chart_06_tab_2.grid(row=0, column=6, padx=10)
 
 
@@ -764,29 +769,103 @@ class View(ttk.Frame):
             self.data_delete_chart_01_tab_2()
             self.open_button_chart_01_tab_2.config(text="01 Otwarty")
 
+    def canal_02(self):
 
-###################################################################################################################################
+        if self.is_on_canal_02:
+            self.data_trans_chart_02_tab_2()
+            self.is_on_canal_02 = False
+            self.open_button_chart_02_tab_2.config(text="01 Zamknięty")
+
+        else:
+            self.is_on_canal_02 = True
+            self.data_delete_chart_02_tab_2()
+            self.open_button_chart_02_tab_2.config(text="01 Otwarty")
+
+    def canal_03(self):
+
+        if self.is_on_canal_03:
+            self.data_trans_chart_03_tab_2()
+            self.is_on_canal_03 = False
+            self.open_button_chart_03_tab_2.config(text="01 Zamknięty")
+
+        else:
+            self.is_on_canal_03 = True
+            self.data_delete_chart_03_tab_2()
+            self.open_button_chart_03_tab_2.config(text="01 Otwarty")
+
+    def canal_04(self):
+
+        if self.is_on_canal_04:
+            self.data_trans_chart_04_tab_2()
+            self.is_on_canal_04 = False
+            self.open_button_chart_04_tab_2.config(text="01 Zamknięty")
+
+        else:
+            self.is_on_canal_04 = True
+            self.data_delete_chart_04_tab_2()
+            self.open_button_chart_04_tab_2.config(text="01 Otwarty")
+
+    def canal_05(self):
+
+        if self.is_on_canal_05:
+            self.data_trans_chart_05_tab_2()
+            self.is_on_canal_05 = False
+            self.open_button_chart_05_tab_2.config(text="01 Zamknięty")
+
+        else:
+            self.is_on_canal_05 = True
+            self.data_delete_chart_05_tab_2()
+            self.open_button_chart_05_tab_2.config(text="01 Otwarty")
+
+    def canal_06(self):
+
+        if self.is_on_canal_06:
+            self.data_trans_chart_06_tab_2()
+            self.is_on_canal_06 = False
+            self.open_button_chart_06_tab_2.config(text="01 Zamknięty")
+
+        else:
+            self.is_on_canal_06 = True
+            self.data_delete_chart_06_tab_2()
+            self.open_button_chart_06_tab_2.config(text="01 Otwarty")
+
+    ###################################################################################################################################
     def data_trans_chart_01_tab_2(self):
        self.controller.trans_01_tab_2()
 
     def data_trans_chart_02_tab_2(self):
        self.controller.trans_02_tab_2()
-       self.open_button_chart_02_tab_2.config(state=DISABLED)
+
     def data_trans_chart_03_tab_2(self):
        self.controller.trans_03_tab_2()
-       self.open_button_chart_03_tab_2.config(state=DISABLED)
+
     def data_trans_chart_04_tab_2(self):
        self.controller.trans_04_tab_2()
-       self.open_button_chart_04_tab_2.config(state=DISABLED)
+
     def data_trans_chart_05_tab_2(self):
         self.controller.trans_05_tab_2()
-        self.open_button_chart_05_tab_2.config(state=DISABLED)
+
     def data_trans_chart_06_tab_2(self):
         self.controller.trans_06_tab_2()
-        self.open_button_chart_06_tab_2.config(state=DISABLED)
+
 
     def data_delete_chart_01_tab_2(self):
-        print('data_delete')
+        print('data_delete 01')
+
+    def data_delete_chart_02_tab_2(self):
+        print('data_delete 02')
+    def data_delete_chart_03_tab_2(self):
+        print('data_delete 03')
+
+    def data_delete_chart_04_tab_2(self):
+        print('data_delete 04')
+
+    def data_delete_chart_05_tab_2(self):
+        print('data_delete 05')
+
+    def data_delete_chart_06_tab_2(self):
+        print('data_delete 06')
+
 
     ####################################################################################################################################
 
