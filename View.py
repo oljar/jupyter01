@@ -477,7 +477,7 @@ class View(ttk.Frame):
         lf301 = ttk.LabelFrame(tab2, width=500, height=180, text="Kanał")
         lf301.grid(column=0, row=0, padx=15, pady=15)
 
-        lf302 = ttk.LabelFrame(tab2, width=500, height=180, text="Łącz")
+        lf302 = ttk.LabelFrame(tab2, width=50, height=18, text="Wygaś")
         lf302.grid(column=0, row=1, padx=15, pady=15)
 
         lf303 = ttk.LabelFrame(tab2, width=500, height=180, text="Wynik")
@@ -509,8 +509,8 @@ class View(ttk.Frame):
 
         #########################################################################################################################
 
-        self.aggregation_button_tab_2 = ttk.Button(lf302, text='Agreguj', command=self.aggregation_united_data_clicked_tab_2)
-        self.aggregation_button_tab_2.grid(row=0, column=0, padx=10)
+
+
 
         #########################################################################################################################
 
@@ -832,39 +832,46 @@ class View(ttk.Frame):
     ###################################################################################################################################
     def data_trans_chart_01_tab_2(self):
        self.controller.trans_01_tab_2()
+       self.controller.agg_tab_2()
 
     def data_trans_chart_02_tab_2(self):
        self.controller.trans_02_tab_2()
+       self.controller.agg_tab_2()
 
     def data_trans_chart_03_tab_2(self):
        self.controller.trans_03_tab_2()
+       self.controller.agg_tab_2()
 
     def data_trans_chart_04_tab_2(self):
        self.controller.trans_04_tab_2()
+       self.controller.agg_tab_2()
 
     def data_trans_chart_05_tab_2(self):
         self.controller.trans_05_tab_2()
+        self.controller.agg_tab_2()
 
     def data_trans_chart_06_tab_2(self):
         self.controller.trans_06_tab_2()
+        self.controller.agg_tab_2()
 
 
     def data_delete_chart_01_tab_2(self):
-        print('data_delete 01')
+        self.controller.data_delete_chart_01()
 
     def data_delete_chart_02_tab_2(self):
-        print('data_delete 02')
+        self.controller.data_delete_chart_02()
+
     def data_delete_chart_03_tab_2(self):
-        print('data_delete 03')
+        self.controller.data_delete_chart_03()
 
     def data_delete_chart_04_tab_2(self):
-        print('data_delete 04')
+        self.controller.data_delete_chart_04()
 
     def data_delete_chart_05_tab_2(self):
-        print('data_delete 05')
+        self.controller.data_delete_chart_05()
 
     def data_delete_chart_06_tab_2(self):
-        print('data_delete 06')
+        self.controller.data_delete_chart_06()
 
 
     ####################################################################################################################################

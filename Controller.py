@@ -335,13 +335,13 @@ class Controller:
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
         self.model.name_serial_var = self.view.name_serial_var.get()
 
-        return (self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
+        return [self.x_exam_pts_basic, self.y_exam_pts_basic, self.x_trend_pts_1, self.y_trend_pts_1,
                 self.model.name_of_chart_var,
                 self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-                self.model.name_serial_var)
+                self.model.name_serial_var]
 
     def save_nature_data_tab_0(self):
         solution = pd.DataFrame()
@@ -373,13 +373,13 @@ class Controller:
         self.model.scope_min_of_Y_axis_var = self.view.scope_min_of_Y_axis_var.get()
         self.model.scope_max_of_Y_axis_var = self.view.scope_max_of_Y_axis_var.get()
 
-        return (self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
+        return [self.x_exam_pts_4, self.y_exam_pts_4, self.x_trend_pts_4, self.y_trend_pts_4,
                 self.model.name_of_chart_var,
                 self.model.name_of_X_axis_var, self.model.unit_of_X_axis_var,
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-                self.model.name_serial_var)
+                self.model.name_serial_var]
 
         ######################################################################################################################
 
@@ -411,7 +411,7 @@ class Controller:
         self.y1_tab1_exam_pts = df11[y1_tag_tab1].tolist()  # definition of column -y1
         self.y2_tab1_exam_pts = df11[y2_tag_tab1].tolist()  # definition of column -y2
 
-    def chart(self, x, y1, y2,scale_time):
+    def chart(self, x, y1, y2, scale_time):
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
 
@@ -430,7 +430,6 @@ class Controller:
         time_2_s = time_2.hour * 3600 + time_2.minute * 60 + time_2.second
         range_time = time_2_s - time_1_s
 
-
         ax1.set_xticks(np.arange(-5, range_time, scale_time))
 
         # Show the major grid and style it slightly.
@@ -448,7 +447,6 @@ class Controller:
         y2_tab1_exam_pts = self.y2_tab1_exam_pts
         self.model.scale_time_chart = self.view.scale_time_chart.get()
         scale_time_chart = int(self.model.scale_time_chart)
-
 
         self.chart(time_tab1_exam_pts, y1_tab1_exam_pts, y2_tab1_exam_pts, scale_time_chart)
 
@@ -479,7 +477,7 @@ class Controller:
         self.model.scale_time_chart = self.view.scale_time_chart.get()
         scale_time_chart = int(self.model.scale_time_chart)
 
-        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts,scale_time_chart)
+        self.chart(time_modyfied_tab1_exam_pts, y1_modyfied_tab1_exam_pts, y2_modyfied_tab1_exam_pts, scale_time_chart)
 
     def save_modyfied_data_clicked_tab_1(self):
         solution = pd.DataFrame()
@@ -524,6 +522,32 @@ class Controller:
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
 
+    ############################################################################
+    def data_delete_chart_01(self):
+        self.agg_tab_2().remove(self.temporary_chart_1_data)
+        print(self.agg_tab_2())
+
+
+
+    def data_delete_chart_02(self):
+        del (self.agg_tab_2()[1])
+        print(self.agg_tab_2())
+
+    def data_delete_chart_03(self):
+        self.agg_tab_2().remove(self.temporary_chart_3_data)
+        print(len(self.agg_tab_2()))
+
+    def data_delete_chart_04(self):
+        self.agg_tab_2().remove(self.temporary_chart_4_data)
+        print(len(self.agg_tab_2()))
+    def data_delete_chart_05(self):
+        self.agg_tab_2().remove(self.temporary_chart_5_data)
+        print(len(self.agg_tab_2()))
+
+    def data_delete_chart_06(self):
+        self.agg_tab_2().remove(self.temporary_chart_6_data)
+        print(len(self.agg_tab_2()))
+
     def agg_tab_2(self):
         agg = []
         if self.temporary_chart_1_data != 0:
@@ -547,7 +571,7 @@ class Controller:
 
         if num_li == 1 or num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
             x, y, x_trend, y_trend, name_serial_var = (solist[0])[0], (solist[0])[1], (solist[0])[2], (solist[0])[3], \
-                                                      (solist[0])[13]
+                (solist[0])[13]
             sns.scatterplot(x=x, y=y, c="orange", s=40, alpha=0.3, edgecolors='none', label=name_serial_var)
             sns.lineplot(x=x_trend, y=y_trend, color="g", ax=ax, linewidth=1, label=name_serial_var)
 
