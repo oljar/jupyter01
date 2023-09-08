@@ -17,10 +17,12 @@ import datetime as dt
 np.random.seed(42)
 import matplotlib.pyplot as plt
 import seaborn as sns
+import copy
 
 
 class Controller:
     def __init__(self, model, view):
+        self.agg_tab_2_final = None
         self.model = model
         self.view = view
 
@@ -30,6 +32,14 @@ class Controller:
         self.temporary_chart_4_data = 0
         self.temporary_chart_5_data = 0
         self.temporary_chart_6_data = 0
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
+        self.agg = []
+
 
     def open_data(self):
 
@@ -207,6 +217,10 @@ class Controller:
 
             x_output = filtred['X_Exam'].tolist()
             y_output = filtred['Y_Exam'].tolist()
+
+            x_trend_points = list(x_trend_points)
+            y_trend_points = list(y_trend_points)
+
             return x_output, y_output, x_trend_points, y_trend_points
 
         def density_control(x, y, density=1):
@@ -238,7 +252,7 @@ class Controller:
 
         x_exam_pts_3, y_exam_pts_3, self.x_trend_pts_1, self.y_trend_pts_1 = main_proces(x_exam_pts_2, y_exam_pts_2)
 
-        # chart(x_exam_pts_3, y_exam_pts_3, x_trend_pts_1, y_trend_pts_1, x_exam_pts_2)
+
 
         # hier set % scope of slice
 
@@ -496,78 +510,129 @@ class Controller:
         self.temporary_chart_1_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_1_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = True
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
+
 
     def trans_02_tab_2(self):
         self.temporary_chart_2_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_2_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = True
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
 
     def trans_03_tab_2(self):
         self.temporary_chart_3_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_3_data = self.export_modyfied_data_tab_0()
-
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = True
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
     def trans_04_tab_2(self):
         self.temporary_chart_4_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_4_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = True
+        self.trans_perm_05 = False
+        self.trans_perm_06 = False
 
     def trans_05_tab_2(self):
         self.temporary_chart_5_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_5_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = True
+        self.trans_perm_06 = False
 
     def trans_06_tab_2(self):
         self.temporary_chart_6_data = self.export_nature_data_tab_0()
         if self.view.switch_modyfied_export == True:
             self.temporary_chart_6_data = self.export_modyfied_data_tab_0()
+        self.trans_perm_01 = False
+        self.trans_perm_02 = False
+        self.trans_perm_03 = False
+        self.trans_perm_04 = False
+        self.trans_perm_05 = False
+        self.trans_perm_06 = True
 
     ############################################################################
     def data_delete_chart_01(self):
-        self.agg_tab_2().remove(self.temporary_chart_1_data)
-        print(self.agg_tab_2())
-
+        self.agg_tab_2_final.remove(self.temporary_chart_1_data)
+        print(self.agg_tab_2_final)
 
 
     def data_delete_chart_02(self):
-        del (self.agg_tab_2()[1])
-        print(self.agg_tab_2())
+        self.agg_tab_2_final.remove(self.temporary_chart_2_data)
+        print(self.agg_tab_2_final)
 
     def data_delete_chart_03(self):
-        self.agg_tab_2().remove(self.temporary_chart_3_data)
-        print(len(self.agg_tab_2()))
+        self.agg_tab_2_final.remove(self.temporary_chart_3_data)
+        print(self.agg_tab_2_final)
 
     def data_delete_chart_04(self):
-        self.agg_tab_2().remove(self.temporary_chart_4_data)
-        print(len(self.agg_tab_2()))
+        self.agg_tab_2_final.remove(self.temporary_chart_4_data)
+        print(self.agg_tab_2_final)
     def data_delete_chart_05(self):
-        self.agg_tab_2().remove(self.temporary_chart_5_data)
-        print(len(self.agg_tab_2()))
+        self.agg_tab_2_final.remove(self.temporary_chart_5_data)
+        print(self.agg_tab_2_final)
 
     def data_delete_chart_06(self):
-        self.agg_tab_2().remove(self.temporary_chart_6_data)
-        print(len(self.agg_tab_2()))
+        self.agg_tab_2_final.remove(self.temporary_chart_6_data)
+        print(self.agg_tab_2_final)
 
     def agg_tab_2(self):
-        agg = []
-        if self.temporary_chart_1_data != 0:
-            agg.append(self.temporary_chart_1_data)
-        if self.temporary_chart_2_data != 0:
-            agg.append(self.temporary_chart_2_data)
-        if self.temporary_chart_3_data != 0:
-            agg.append(self.temporary_chart_3_data)
-        if self.temporary_chart_4_data != 0:
-            agg.append(self.temporary_chart_4_data)
-        if self.temporary_chart_5_data != 0:
-            agg.append(self.temporary_chart_5_data)
-        if self.temporary_chart_6_data != 0:
-            agg.append(self.temporary_chart_6_data)
 
-        return agg
+        print(f'perm01{self.trans_perm_01}')
+        print(f'perm02{self.trans_perm_02}')
+        print(f'perm03{self.trans_perm_03}')
+        print(f'perm04{self.trans_perm_04}')
+        print(f'perm05{self.trans_perm_05}')
+        print(f'perm06{self.trans_perm_06}')
+        if self.temporary_chart_1_data != 0 and self.trans_perm_01:
+            self.agg.append(self.temporary_chart_1_data)
+            print('append1')
+        if self.temporary_chart_2_data != 0 and self.trans_perm_02:
+            self.agg.append(self.temporary_chart_2_data)
+            print('append2')
+        if self.temporary_chart_3_data != 0 and self.trans_perm_03:
+            self.agg.append(self.temporary_chart_3_data)
+            print('append3')
+        if self.temporary_chart_4_data != 0 and self.trans_perm_04:
+            self.agg.append(self.temporary_chart_4_data)
+            print('append4')
+        if self.temporary_chart_5_data != 0 and self.trans_perm_05:
+            self.agg.append(self.temporary_chart_5_data)
+            print('append5')
+        if self.temporary_chart_6_data != 0 and self.trans_perm_06:
+            self.agg.append(self.temporary_chart_6_data)
+            print('append6')
+
+        self.agg_tab_2_final = self.agg
+
+        return self.agg
 
     def chart1(self, solist):
         fig, ax = plt.subplots()
         num_li = len(solist)
+
+
 
         if num_li == 1 or num_li == 2 or num_li == 3 or num_li == 4 or num_li == 5 or num_li == 6:
             x, y, x_trend, y_trend, name_serial_var = (solist[0])[0], (solist[0])[1], (solist[0])[2], (solist[0])[3], \
@@ -627,8 +692,9 @@ class Controller:
         plt.title((solist[0])[4])
         plt.show()
 
+
     def united_chart_execution_tab_2(self):
-        self.chart1(self.agg_tab_2())
+        self.chart1(self.agg_tab_2_final)
 
     ################
     # print((self.agg_tab_2()[0])[0])
