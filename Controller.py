@@ -166,7 +166,7 @@ class Controller:
 
             # coefficients od polynomial 2-grade (trend)
             coefs = poly.polyfit(x_exam_points, y_exam_points, deg)
-
+            print(f'współczynniki wielomianu{coefs}')
             y_trend_points = poly.polyval(x_trend_points, coefs)
 
             def distance_point_to_curve(x0, y0, x_curve, y_curve):
