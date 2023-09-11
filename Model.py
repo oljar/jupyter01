@@ -10,7 +10,13 @@ class Model:
                  name_of_X_axis_var, unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
                  name_of_Y_axis_var,unit_of_Y_axis_var,scope_min_of_Y_axis_var,scope_max_of_Y_axis_var,
                  name_serial_var,
-                 scale_time_chart):
+                 scale_time_chart,
+                 scope_down_back_entry_x_var,
+                 scope_up_back_entry_x_var,
+                 scope_up_back_entry_y_var,
+                 scope_down_back_entry_y_var,
+                 switch_background
+                  ):
 
         self.name = name
 
@@ -50,6 +56,12 @@ class Model:
 
         self.name_serial_var = name_serial_var
         self.scale_time_chart = scale_time_chart
+
+        self.scope_down_back_entry_x_var = scope_down_back_entry_x_var
+        self.scope_up_back_entry_x_var = scope_up_back_entry_x_var
+        self.scope_down_back_entry_y_var = scope_down_back_entry_y_var
+        self.scope_up_back_entry_y_var = scope_up_back_entry_y_var
+        self.switch_background = switch_background
 
 
 
@@ -98,7 +110,7 @@ class Model:
             if str(self.time_var_tab1) in str(row):
                 result_row_number.append(row_number)
 
-        print(int(result_row_number[0]))
+
         df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]))
         df1.sort_values(by=self.time_var_tab1, ascending=True)
         return df1
