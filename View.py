@@ -13,7 +13,7 @@ from data_source import *
 
 
 window = tk.Tk()
-window.title("Data modificator")
+window.title("Chart plotter")
 window.geometry('790x850')
 
 tab_parent = ttk.Notebook(window)
