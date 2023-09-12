@@ -493,7 +493,7 @@ class View(ttk.Frame):
         self.label.grid(row=1, column=0)
 
 
-        self.down_scope_label = ttk.Label(lf102, text='dolny zakres:')
+        self.down_scope_label = ttk.Label(lf102, text='zakres dolny:[hh:mm:ss]')
         self.down_scope_label.grid(row = 10, column=0)
 
 
@@ -505,7 +505,7 @@ class View(ttk.Frame):
 
 
 
-        self.up_scope_label = ttk.Label(lf102, text='górny zakres:')
+        self.up_scope_label = ttk.Label(lf102, text='zakres górny:[hh:ss:mm]')
         self.up_scope_label.grid(row = 10, column=2)
 
 
