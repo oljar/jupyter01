@@ -95,7 +95,8 @@ class View(ttk.Frame):
         self.scope_up_back_entry_y_var = tk.StringVar()
         self.scope_down_back_entry_y_var = tk.StringVar()
 
-
+        self.name_picture = tk.StringVar()
+        self.trans_picture = tk.StringVar()
 
 
         # create widgets
@@ -111,7 +112,7 @@ class View(ttk.Frame):
         lf3 = ttk.LabelFrame(tab0, width=500, height=180, text="Modyfikacje")
         lf3.grid(column=1, row=3, padx=15, pady=15)
 
-        lf4 = ttk.LabelFrame(tab0, width=600, height=100, text="Wstaw zdjęcie")
+        lf4 = ttk.LabelFrame(tab0, width=600, height=100, text="Wstaw tło")
         lf4.grid(column=1, row=4, padx=15, pady=15)
 
 
@@ -392,11 +393,22 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=25, column=0)
 
-        self.choice_button_foto_background = ttk.Button(lf4, text='wybierz tło', command=self.choice_btn_foto_back_clicked_tab_0)
+        self.choice_button_foto_background = ttk.Button(lf4, text='wybierz tło', command=self.show_open_picture_clicked_tab_0)
         self.choice_button_foto_background.grid(row=30, column=2, padx=10)
+
+        self.label_trans_picture = ttk.Label(lf4, text='przeźroczystość - ')
+        self.label_trans_picture.grid(row=30, column=3, sticky=tk.E)
+
+        self.trans_picture_entry = ttk.Entry(lf4, textvariable=self.trans_picture, width=5)
+        self.trans_picture_entry.insert(0, get_data.trasparency_picture)
+        self.trans_picture_entry.grid(row=30, column=4, sticky=tk.W)
+
+
 
         self.draw_chart_button_background = ttk.Button(lf4, text='wykres bez tła', command=self.draw_btn_foto_back_clicked_tab_0)
         self.draw_chart_button_background.grid(row=30, column=5, padx=10)
+
+
 
 
 
@@ -728,6 +740,18 @@ class View(ttk.Frame):
         if file2 is not None:
             self.save_name_var.set(str(file2.name))
 
+
+
+    def show_open_picture_clicked_tab_0(self):
+
+        picture1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[
+                    ("image", ".jpeg"),
+                    ("image", ".png"),
+                    ("image", ".jpg"),
+                    ("image", ".bmp")
+                ])
+
+        self.name_picture.set(str(picture1.name))
 
 
     def open_button_clicked(self):

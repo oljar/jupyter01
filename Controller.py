@@ -384,7 +384,7 @@ class Controller:
                 self.model.scope_min_of_X_axis_var, self.model.scope_max_of_X_axis_var,
                 self.model.name_of_Y_axis_var, self.model.unit_of_Y_axis_var,
                 self.model.scope_min_of_Y_axis_var, self.model.scope_max_of_Y_axis_var,
-                self.model.name_serial_var]
+                self.model.name_serial_var, self.coefs]
 
         ######################################################################################################################
 
@@ -625,6 +625,10 @@ class Controller:
         self.model.scope_up_back_entry_x_var = self.view.scope_up_back_entry_x_var.get()
         self.model.scope_down_back_entry_y_var = self.view.scope_down_back_entry_y_var.get()
         self.model.scope_up_back_entry_y_var = self.view.scope_up_back_entry_y_var.get()
+        self.model.name_picture = str(self.view.name_picture.get())
+        self.model.trans_picture = float(self.view.trans_picture.get())
+        print(f'prezro{self.model.trans_picture}')
+        print(self.model.name_picture)
 
         fig, ax = plt.subplots()
         num_li = len(solist)
@@ -662,7 +666,7 @@ class Controller:
         if num_li == 6:
             x5, y5, x5_trend, y5_trend, name_serial_var5 = (solist[5])[0], (solist[5])[1], (solist[5])[2], (solist[5])[
                 3], (solist[5])[13]
-            sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=0.3, edgecolors='none', label=name_serial_var5)
+            sns.scatterplot(x=x5, y=y5, c="red", s=40, alpha=self.model.trans_picture, edgecolors='none', label=name_serial_var5)
             sns.lineplot(x=x5_trend, y=y5_trend, color="g", ax=ax, linewidth=1, label=name_serial_var5)
 
 
@@ -681,8 +685,8 @@ class Controller:
         ax.minorticks_on()
 
         if self.model.switch_background:
-            img = mpimg.imread('sample.jpg')
-            plt.imshow(img, extent=[int(self.model.scope_down_back_entry_x_var),int(self.model.scope_up_back_entry_x_var),int(self.model.scope_down_back_entry_y_var), int(self.model.scope_up_back_entry_y_var)], aspect='auto', alpha= 0.1)
+            img = mpimg.imread(self.model.name_picture )
+            plt.imshow(img, extent=[int(self.model.scope_down_back_entry_x_var),int(self.model.scope_up_back_entry_x_var),int(self.model.scope_down_back_entry_y_var), int(self.model.scope_up_back_entry_y_var)], aspect='auto', alpha= self.model.trans_picture)
 
         plt.title((solist[0])[4])
         plt.show()
@@ -747,23 +751,9 @@ class Controller:
 
         solution.to_csv(str(self.view.save_name_var.get()), sep=';', decimal=',', index=True)
 
-    def choice_btn_foto_back_tab_0(self):
-        self.model.scope_up_back_entry_x_var = self.view.scope_up_back_entry_x_var
-        self.model.scope_down_back_entry_x_var = self.view.scope_down_back_entry_x_var
-
-        #
-        # print(self.model.scope_up_back_entry_x_var)
-        # print(self.model.scope_down_back_entry_x_var)
-        print(self.view.switch_background)
-
+    # def choice_btn_foto_back_tab_0(self):
+    #
+     # print(self.model.open_name_var.get())
 
     def draw_btn_foto_back_tab_0(self):
-        pass
-
-        # self.model.scope_up_back_entry_y_var = self.view.scope_up_back_entry_y_var
-        # self.model.scope_down_back_entry_y_var = self.view.scope_down_back_entry_y_var
-        #
-        # print(self.model.scope_up_back_entry_y_var)
-        # print(self.model.scope_down_back_entry_y_var)
-
-
+        print(self.model.name)

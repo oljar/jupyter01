@@ -24,3 +24,4 @@ class GetData:
     scope_up_x_background_entry_tab0 = 100
     scope_down_y_background_entry_tab0 = 5
     scope_up_y_background_entry_tab0 = 105
+    trasparency_picture = 0.5

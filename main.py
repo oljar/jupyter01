@@ -63,6 +63,9 @@ scope_up_back_entry_y_var = tk.StringVar()
 scope_down_back_entry_y_var = tk.StringVar()
 switch_background = tk.BooleanVar()
 
+name_picture = tk.StringVar()
+trans_picture = tk.StringVar()
+
 
 
 
@@ -78,7 +81,9 @@ model = Model(name,dist_border,dens_factor,modify_down_scope,modify_up_scope,x_v
               scope_down_back_entry_x_var,
               scope_up_back_entry_y_var,
               scope_down_back_entry_y_var,
-              switch_background
+              switch_background,
+              name_picture,
+              trans_picture
               )
 
 controller = Controller(model, view)
