@@ -115,6 +115,9 @@ class View(ttk.Frame):
         lf4 = ttk.LabelFrame(tab0, width=600, height=100, text="Wstaw tło")
         lf4.grid(column=1, row=4, padx=15, pady=15)
 
+        lf5 = ttk.LabelFrame(tab0, text="Zapis")
+        lf5.grid(column=2, row=3)
+
 
 
 
@@ -152,8 +155,6 @@ class View(ttk.Frame):
         self.name_serial_entry = ttk.Entry(lf1, textvariable=self.name_serial_var, width=35)
         self.name_serial_entry.insert(0, get_data.name_serial_var)
         self.name_serial_entry.grid(row=20, column=5, sticky=tk.NSEW)
-
-
 
 
 
@@ -393,10 +394,10 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=25, column=0)
 
-        self.choice_button_foto_background = ttk.Button(lf4, text='wybierz tło', command=self.show_open_picture_clicked_tab_0)
+        self.choice_button_foto_background = ttk.Button(lf4, text='Wybierz tło', command=self.show_open_picture_clicked_tab_0)
         self.choice_button_foto_background.grid(row=30, column=2, padx=10)
 
-        self.label_trans_picture = ttk.Label(lf4, text='przeźroczystość - ')
+        self.label_trans_picture = ttk.Label(lf4, text='przezroczystość - ')
         self.label_trans_picture.grid(row=30, column=3, sticky=tk.E)
 
         self.trans_picture_entry = ttk.Entry(lf4, textvariable=self.trans_picture, width=5)
@@ -408,10 +409,8 @@ class View(ttk.Frame):
         self.draw_chart_button_background = ttk.Button(lf4, text='wykres bez tła', command=self.draw_btn_foto_back_clicked_tab_0)
         self.draw_chart_button_background.grid(row=30, column=5, padx=10)
 
-
-
-
-
+        self.button_save_config = ttk.Button(lf5, text='cfg', command=self.show_open_file_clicked_tab_0,width=6)
+        self.button_save_config.grid(row=0, column=0,ipady=90 )
 
 
 
@@ -427,13 +426,26 @@ class View(ttk.Frame):
        ######################################################################################################################################################
 
         lf101 = ttk.LabelFrame(tab1, width=500, height=180, text="Dane" )
-        lf101.grid(column=0, row=0, padx=15, pady=15,sticky=W)
+        lf101.grid(column=0, row=1, padx=15, pady=15,sticky=W)
 
         lf102 = ttk.LabelFrame(tab1, width=500, height=180, text="Zmiana zakresu")
-        lf102.grid(column=0, row=1, padx=15, pady=15,sticky=W)
+        lf102.grid(column=0, row=2, padx=15, pady=15,sticky=W)
 
         lf103 = ttk.LabelFrame(tab1, width=100, height=50, text="Podziałka czasu")
-        lf103.grid(column=0, row=2, padx=15, pady=15,sticky=W)
+        lf103.grid(column=0, row=3, padx=15, pady=15, sticky=W)
+
+        lf104 = ttk.LabelFrame(tab1, width=100, height=50, text="Wczytaj ")
+        lf104.grid(column=0, row=0, padx=15, pady=15, sticky=W)
+
+
+        ########################################
+
+        self.open_button_data_tab_1 = ttk.Button(lf104, text='*.cfg',command=self.show_open_file_clicked_tab_1)
+        self.open_button_data_tab_1.grid(row=1, column=0, padx=10)
+
+
+
+
 
         #########################################
 
@@ -442,6 +454,9 @@ class View(ttk.Frame):
 
 
         #######################################
+
+
+
 
 
         self.label = ttk.Label(lf101)
@@ -469,6 +484,9 @@ class View(ttk.Frame):
         self.column_y_tag_tab1_entry= ttk.Entry(lf101, textvariable=self.y2_var_tab1, width=10)
         self.column_y_tag_tab1_entry.insert(0, get_data.column_y_tag_tab1)
         self.column_y_tag_tab1_entry.grid(row=20, column=5, sticky=tk.NSEW)
+
+
+
 
 
         #############################################################
@@ -556,7 +574,7 @@ class View(ttk.Frame):
         # tab 2
         ###############################################################################################################################
 
-        lf301 = ttk.LabelFrame(tab2, width=500, height=180, text="Kanał")
+        lf301 = ttk.LabelFrame(tab2, width=500, height=180, text="Seria")
         lf301.grid(column=0, row=0, padx=15, pady=15)
 
         lf302 = ttk.LabelFrame(tab2, width=50, height=18, text="Wygaś")
@@ -569,23 +587,23 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf301)
         self.label.grid(row=0, column=0)
 
-        self.open_button_chart_01_tab_2 = ttk.Button(lf301, text='01 Otwarty', command=self.canal_01)
+        self.open_button_chart_01_tab_2 = ttk.Button(lf301, text='01 Otwarta', command=self.canal_01)
         self.open_button_chart_01_tab_2.grid(row=0, column=0, padx=10)
 
 
-        self.open_button_chart_02_tab_2 = ttk.Button(lf301, text='02 Otwarty', command=self.canal_02)
+        self.open_button_chart_02_tab_2 = ttk.Button(lf301, text='02 Otwarta', command=self.canal_02)
         self.open_button_chart_02_tab_2.grid(row=0, column=1, padx=10)
 
-        self.open_button_chart_03_tab_2 = ttk.Button(lf301, text='03 Otwarty', command=self.canal_03)
+        self.open_button_chart_03_tab_2 = ttk.Button(lf301, text='03 Otwarta', command=self.canal_03)
         self.open_button_chart_03_tab_2.grid(row=0, column=3, padx=10)
 
-        self.open_button_chart_04_tab_2 = ttk.Button(lf301, text='04 Otwarty', command=self.canal_04)
+        self.open_button_chart_04_tab_2 = ttk.Button(lf301, text='04 Otwarta', command=self.canal_04)
         self.open_button_chart_04_tab_2.grid(row=0, column=4, padx=10)
 
-        self.open_button_chart_05_tab_2 = ttk.Button(lf301, text='05 Otwarty', command=self.canal_05)
+        self.open_button_chart_05_tab_2 = ttk.Button(lf301, text='05 Otwarta', command=self.canal_05)
         self.open_button_chart_05_tab_2.grid(row=0, column=5, padx=10)
 
-        self.open_button_chart_06_tab_2 = ttk.Button(lf301, text='06 Otwarty', command=self.canal_06)
+        self.open_button_chart_06_tab_2 = ttk.Button(lf301, text='06 Otwarta', command=self.canal_06)
         self.open_button_chart_06_tab_2.grid(row=0, column=6, padx=10)
 
 
@@ -879,72 +897,72 @@ class View(ttk.Frame):
         if self.is_on_canal_01:
             self.data_trans_chart_01_tab_2()
             self.is_on_canal_01 = False
-            self.open_button_chart_01_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_01_tab_2.config(text="01 Zajęta")
 
         else:
             self.is_on_canal_01 = True
             self.data_delete_chart_01_tab_2()
-            self.open_button_chart_01_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_01_tab_2.config(text="01 Otwarta")
 
     def canal_02(self):
 
         if self.is_on_canal_02:
             self.data_trans_chart_02_tab_2()
             self.is_on_canal_02 = False
-            self.open_button_chart_02_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_02_tab_2.config(text="02 Zajęta ")
 
         else:
             self.is_on_canal_02 = True
             self.data_delete_chart_02_tab_2()
-            self.open_button_chart_02_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_02_tab_2.config(text="02 Otwarta")
 
     def canal_03(self):
 
         if self.is_on_canal_03:
             self.data_trans_chart_03_tab_2()
             self.is_on_canal_03 = False
-            self.open_button_chart_03_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_03_tab_2.config(text="03 Zajęta")
 
         else:
             self.is_on_canal_03 = True
             self.data_delete_chart_03_tab_2()
-            self.open_button_chart_03_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_03_tab_2.config(text="03 Otwarta")
 
     def canal_04(self):
 
         if self.is_on_canal_04:
             self.data_trans_chart_04_tab_2()
             self.is_on_canal_04 = False
-            self.open_button_chart_04_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_04_tab_2.config(text="04 Zamknięta")
 
         else:
             self.is_on_canal_04 = True
             self.data_delete_chart_04_tab_2()
-            self.open_button_chart_04_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_04_tab_2.config(text="04 Otwarta")
 
     def canal_05(self):
 
         if self.is_on_canal_05:
             self.data_trans_chart_05_tab_2()
             self.is_on_canal_05 = False
-            self.open_button_chart_05_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_05_tab_2.config(text="05 Zamknięta")
 
         else:
             self.is_on_canal_05 = True
             self.data_delete_chart_05_tab_2()
-            self.open_button_chart_05_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_05_tab_2.config(text="05 Otwarta")
 
     def canal_06(self):
 
         if self.is_on_canal_06:
             self.data_trans_chart_06_tab_2()
             self.is_on_canal_06 = False
-            self.open_button_chart_06_tab_2.config(text="01 Zamknięty")
+            self.open_button_chart_06_tab_2.config(text="06 Zamknięta")
 
         else:
             self.is_on_canal_06 = True
             self.data_delete_chart_06_tab_2()
-            self.open_button_chart_06_tab_2.config(text="01 Otwarty")
+            self.open_button_chart_06_tab_2.config(text="06 Otwarta")
 
     ###################################################################################################################################
     def data_trans_chart_01_tab_2(self):
