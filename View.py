@@ -429,10 +429,10 @@ class View(ttk.Frame):
         lf101.grid(column=0, row=1, padx=15, pady=15,sticky=W)
 
         lf102 = ttk.LabelFrame(tab1, width=500, height=180, text="Zmiana zakresu")
-        lf102.grid(column=0, row=2, padx=15, pady=15,sticky=W)
+        lf102.grid(column=0, row=3, padx=15, pady=15,sticky=W)
 
         lf103 = ttk.LabelFrame(tab1, width=100, height=50, text="Podziałka czasu")
-        lf103.grid(column=0, row=3, padx=15, pady=15, sticky=W)
+        lf103.grid(column=0, row=2, padx=15, pady=15, sticky=W)
 
         lf104 = ttk.LabelFrame(tab1, width=100, height=50, text="Wczytaj ")
         lf104.grid(column=0, row=0, padx=15, pady=15, sticky=W)
@@ -577,8 +577,8 @@ class View(ttk.Frame):
         lf301 = ttk.LabelFrame(tab2, width=500, height=180, text="Seria")
         lf301.grid(column=0, row=0, padx=15, pady=15)
 
-        lf302 = ttk.LabelFrame(tab2, width=50, height=18, text="Wygaś")
-        lf302.grid(column=0, row=1, padx=15, pady=15)
+        # lf302 = ttk.LabelFrame(tab2, width=50, height=18, text="Wygaś")
+        # lf302.grid(column=0, row=1, padx=15, pady=15)
 
         lf303 = ttk.LabelFrame(tab2, width=500, height=180, text="Wynik")
         lf303.grid(column=0, row=2, padx=15, pady=15)
