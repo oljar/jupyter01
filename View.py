@@ -10,6 +10,7 @@ from tkinter.filedialog import askopenfile
 from tkinter.filedialog import asksaveasfile
 from data_source import *
 from tkinter import messagebox
+import datetime
 
 
 window = tk.Tk()
@@ -126,33 +127,30 @@ class View(ttk.Frame):
             messagebox.showerror('Błąd', 'Wpisano literę')
 
         self.vcmd_number = (window.register(validate_number), '%P')
-        self.ivcmd_number = (self.register(on_invalid_number),)
+        self.ivcmd_number = (window.register(on_invalid_number),)
 
 #####################################################################################################################
 
-        def validate_time(input):
+        def validate_time(value):
 
-            # if input.istime():
-            #     print(input)
-            #     return True
-            #
-            # elif input is "":
-            #     print(input)
-            #     return True
-            #
-            # else:
-            #     print(input)
-            #
-            #     return False
+            if value =='':
+                return True
 
-            pass
+            else:
+                try:
+                    datetime.datetime.strptime(value, '%H:%M:%S')
+                    print('sukces')
+                    return True
+                except:
+                    return False
+
 
         def on_invalid_time():
             # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
-            messagebox.showerror('Błąd', 'Wpisano literę')
+            messagebox.showerror('Błąd', 'Wpisano niewłaściwy format')
 
         self.vcmd_time = (window.register(validate_time), '%P')
-        self.ivcmd_time = (self.register(on_invalid_time),)
+        self.ivcmd_time = (window.register(on_invalid_time),)
 
 
 
@@ -557,8 +555,6 @@ class View(ttk.Frame):
 
 
 
-
-
         #############################################################
 
         self.label = ttk.Label(lf101)
@@ -593,7 +589,7 @@ class View(ttk.Frame):
 
         self.down_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.down_scope_var_tab_1, width=30)
         self.down_scope_entry_tab_1.insert(0, get_data.down_scope_tab1.get())
-        self.down_scope_entry_tab_1.config(validate="key", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
+        self.down_scope_entry_tab_1.config(validate="focusout", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
         self.down_scope_entry_tab_1.grid(row = 10, column=1, sticky=tk.NSEW)
 
         #######################
@@ -607,7 +603,7 @@ class View(ttk.Frame):
 
         self.up_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.up_scope_var_tab_1, width=30)
         self.up_scope_entry_tab_1.insert(0, get_data.up_scope_tab_1.get())
-        self.up_scope_entry_tab_1.config(validate="key", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
+        self.up_scope_entry_tab_1.config(validate="focusout", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
         self.up_scope_entry_tab_1.grid(row = 10, column=3, sticky=tk.NSEW)
 
 
@@ -1001,6 +997,7 @@ class View(ttk.Frame):
                             filetypes=[('CSV Files', '*.csv')],)
 
         self.open_name_var.set(str(file11.name))
+
 
 
 
