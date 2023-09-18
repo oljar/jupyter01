@@ -3,8 +3,9 @@ import csv
 
 
 
+
 class Model:
-    def __init__(self, name, dist_border, dens_factor, modify_down_scope, modify_up_scope, x_var, y_var, x_math_form, y_math_form, polynominal_degree,limit_up_scope,limit_down_scope,step,
+    def __init__(self, name, name_cfg, dist_border, dens_factor, modify_down_scope, modify_up_scope, x_var, y_var, x_math_form, y_math_form, polynominal_degree,limit_up_scope,limit_down_scope,step,
                  time_var_tab1,y1_var_tab1,y2_var_tab1,down_scope_var_tab_1,up_scope_var_tab_1,
                  name_of_chart_var,
                  name_of_X_axis_var, unit_of_X_axis_var,scope_min_of_X_axis_var,scope_max_of_X_axis_var,
@@ -21,6 +22,7 @@ class Model:
                   ):
 
         self.name = name
+        self.name_cfg =name_cfg
 
         self.dist_border = dist_border
         self.dens_factor = dens_factor
@@ -81,10 +83,8 @@ class Model:
         """
         # with open('emails.txt', 'a') as f:
 
-
-        print(f'asdsa{self.name}')
         data_list = []
-        with open(self.name, 'r') as f:
+        with open(self.name, 'r', encoding='utf-8') as f:
             data = csv.reader(f)
             for i in data:
                 data_list.append(i)
@@ -104,7 +104,7 @@ class Model:
     def open_data_tab_1(self):
 
         data_list = []
-        with open(self.name, 'r') as f:
+        with open(self.name, 'r', encoding='utf-8') as f:
             data = csv.reader(f)
             for i in data:
                 data_list.append(i)
@@ -115,6 +115,6 @@ class Model:
                 result_row_number.append(row_number)
 
 
-        df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]))
+        df1 = pd.read_csv(self.name, sep=';', decimal=',', header=int(result_row_number[0]), encoding='utf-8')
         df1.sort_values(by=self.time_var_tab1, ascending=True)
         return df1
