@@ -199,12 +199,8 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf1)
         self.label.grid(row=5,column = 0)
 
-
-        self.show_file = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked_tab_0)
-
-
-
-        self.show_file.grid(row=10, column=0, padx=10)
+        self.show_file_tab0 = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked_tab_0)
+        self.show_file_tab0.grid(row=10, column=0, padx=10)
 
 
         ######################
@@ -405,8 +401,8 @@ class View(ttk.Frame):
         self.label.grid(row=110, column=0)
 
 
-        self.count_button_count = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
-        self.count_button_count.grid(row=100, column=0, padx=10)
+        self.count_button_count_basic_tab0 = ttk.Button(lf3, text='Przelicz', command=self.count_button_clicked_tab_0)
+        self.count_button_count_basic_tab0.grid(row=100, column=0, padx=10)
 
         #############################
 
@@ -903,9 +899,18 @@ class View(ttk.Frame):
 
     def show_open_file_clicked_tab_0(self):
 
-        file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
-        self.open_name_var.set(str(file1.name))
-        print('ok')
+
+        try:
+            file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
+            self.open_name_var.set(str(file1.name))
+            self.show_file_tab0.config(text='ok')
+            self.show_file_tab0.after(self.delay_time,lambda: self.show_file_tab0.config(text='Pobierz dane'))
+
+
+
+        except:
+            errors.err_lack_of_file()
+
 
 
 
@@ -933,8 +938,11 @@ class View(ttk.Frame):
 
     def open_button_clicked(self):
 
-        if self.controller.open_data():
-            self.open_button_tab_1.config(text='ok')
+        try:
+            self.controller.open_data()
+
+        except:
+            errors.err_bad_data()
 
 
 
@@ -949,8 +957,15 @@ class View(ttk.Frame):
 
 
     def count_button_clicked_tab_0(self):
+        try:
+            self.controller.counter()
+            self.count_button_count_basic_tab0.config(text='ok')
+            self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
 
-        self.controller.counter()
+
+
+        except:
+            errors.err_export_count()
 
     def draw_natural_chart_clicked_tab_0(self):
         self.controller.natural_chart_execution_tab_0()
