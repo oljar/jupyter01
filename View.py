@@ -1,6 +1,8 @@
 import re
 import tkinter as tk
 from tkinter import ttk
+
+import error_list
 import source
 from Controller import Controller
 from Model import Model
@@ -11,6 +13,8 @@ from tkinter.filedialog import asksaveasfile
 from data_source import *
 from tkinter import messagebox
 import datetime
+from error_list import *
+import time
 
 
 window = tk.Tk()
@@ -25,9 +29,7 @@ tab3 = ttk.Frame(tab_parent)
 
 get_data = GetData()
 
-
-
-
+errors = Errors()
 
 class View(ttk.Frame):
 
@@ -104,9 +106,14 @@ class View(ttk.Frame):
         self.trans_picture = tk.StringVar()
 
         self.save_name_cfg_var = tk.StringVar()
+
+
 #########################################################################################################################
 # validation
 #########################################################################################################################
+
+
+
         def validate_number(input):
 
             if input.isdigit():
@@ -123,8 +130,8 @@ class View(ttk.Frame):
                 return False
 
         def on_invalid_number():
-            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
-            messagebox.showerror('Błąd', 'Wpisano literę')
+
+            messagebox.showerror('ERROR', 'Wpisano literę')
 
         self.vcmd_number = (window.register(validate_number), '%P')
         self.ivcmd_number = (window.register(on_invalid_number),)
@@ -146,13 +153,17 @@ class View(ttk.Frame):
 
 
         def on_invalid_time():
-            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
-            messagebox.showerror('Błąd', 'Wpisano niewłaściwy format')
+
+            messagebox.showerror('ERROR', 'Wpisano niewłaściwy format')
 
         self.vcmd_time = (window.register(validate_time), '%P')
         self.ivcmd_time = (window.register(on_invalid_time),)
 
 
+
+####################################################################################################################
+#errors
+####################################################################################################################
 
 
 
@@ -484,11 +495,6 @@ class View(ttk.Frame):
 
 
 
-
-
-
-
-
         ######################################################################################################################################################
        #tab1
        ######################################################################################################################################################
@@ -508,8 +514,8 @@ class View(ttk.Frame):
 
         ########################################
 
-        self.open_button_data_tab_1 = ttk.Button(lf104, text='*.cfg',command=self.show_open_file_cfg_clicked_tab_0)
-        self.open_button_data_tab_1.grid(row=1, column=0, padx=10)
+        self.open_button_cfg_data_tab_1 = ttk.Button(lf104, text='*.cfg',command=self.show_open_file_cfg_clicked_tab_0)
+        self.open_button_cfg_data_tab_1.grid(row=1, column=0, padx=10)
 
 
 
@@ -820,8 +826,12 @@ class View(ttk.Frame):
         self.controller = controller
 
     def show_open_file_cfg_clicked_tab_0(self):
-
-        get_data.dicto_paresr()
+        try:
+            get_data.dicto_paresr()
+            self.open_button_cfg_data_tab_1.config(text='ok')
+            self.open_button_cfg_data_tab_1.after(400, lambda: self.open_button_cfg_data_tab_1.config(text='Pobierz dane' ))
+        except:
+            errors.err_lack_of_file_or_bad_data()
 
         self.name_col_x_entry.delete(0, END)
         self.name_col_y_entry.delete(0, END)
@@ -918,12 +928,10 @@ class View(ttk.Frame):
 
 
     def open_button_clicked(self):
-        """
-        Handle button click event
-        :return:
-        """
-        if self.controller:
-            self.controller.open_data()
+
+        if self.controller.open_data():
+            self.open_button_tab_1.config(text='ok')
+
 
 
 
@@ -993,10 +1001,17 @@ class View(ttk.Frame):
 
     def show_open_file_clicked_tab_1(self):
 
-        file11 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',
+        try:
+            file11 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r',
                             filetypes=[('CSV Files', '*.csv')],)
 
-        self.open_name_var.set(str(file11.name))
+            self.open_name_var.set(str(file11.name))
+        except:
+
+            errors.err_lack_of_file()
+
+            # messagebox.showerror('ERROR', 'Brak pliku CSV')
+
 
 
 
@@ -1008,8 +1023,15 @@ class View(ttk.Frame):
         Handle button click event
         :return:
         """
-        if self.controller:
+        try:
             self.controller.open_data_tab_1()
+            print ('ok')
+            self.open_button_tab_1.config(text='ok')
+            self.open_button_tab_1.after(400, lambda: self.open_button_tab_1.config(text='Pobierz dane' ))
+
+
+        except:
+            errors.err_bad_data()
 
 
 
