@@ -107,6 +107,8 @@ class View(ttk.Frame):
 
         self.save_name_cfg_var = tk.StringVar()
 
+        self.delay_time = 500
+
 
 #########################################################################################################################
 # validation
@@ -199,6 +201,8 @@ class View(ttk.Frame):
 
 
         self.show_file = ttk.Button(lf1, text='Wskaż plik csv', command=self.show_open_file_clicked_tab_0)
+
+
 
         self.show_file.grid(row=10, column=0, padx=10)
 
@@ -632,8 +636,8 @@ class View(ttk.Frame):
         self.save_button_tab_1 = ttk.Button(lf102, text='Zapisz', command=self.save_modyfied_data_clicked_tab_1)
         self.save_button_tab_1.grid(row=20, column=3, padx=10)
 
-        self.draw_slice_button_count_tab_1 = ttk.Button(lf102, text='Dalej', command=self.export_clicked_tab_1)
-        self.draw_slice_button_count_tab_1.grid(row=20, column=4, padx=10)
+        self.export_button_count_tab_1 = ttk.Button(lf102, text='Dalej', command=self.export_clicked_tab_1)
+        self.export_button_count_tab_1.grid(row=20, column=4, padx=10)
 
         self.scale_time_chart_entry_tab_1 = ttk.Entry(lf103, textvariable=self.scale_time_chart, width=15)
         self.scale_time_chart_entry_tab_1.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
@@ -829,7 +833,7 @@ class View(ttk.Frame):
         try:
             get_data.dicto_paresr()
             self.open_button_cfg_data_tab_1.config(text='ok')
-            self.open_button_cfg_data_tab_1.after(400, lambda: self.open_button_cfg_data_tab_1.config(text='Pobierz dane' ))
+            self.open_button_cfg_data_tab_1.after(self.delay_time, lambda: self.open_button_cfg_data_tab_1.config(text='Pobierz dane' ))
         except:
             errors.err_lack_of_file_or_bad_data()
 
@@ -1006,6 +1010,8 @@ class View(ttk.Frame):
                             filetypes=[('CSV Files', '*.csv')],)
 
             self.open_name_var.set(str(file11.name))
+            self.open_button_data_tab_1.config(text='ok')
+            self.open_button_data_tab_1.after(self.delay_time,lambda: self.open_button_data_tab_1.config(text='Pobierz dane'))
         except:
 
             errors.err_lack_of_file()
@@ -1027,7 +1033,7 @@ class View(ttk.Frame):
             self.controller.open_data_tab_1()
             print ('ok')
             self.open_button_tab_1.config(text='ok')
-            self.open_button_tab_1.after(400, lambda: self.open_button_tab_1.config(text='Pobierz dane' ))
+            self.open_button_tab_1.after(self.delay_time, lambda: self.open_button_tab_1.config(text='Pobierz dane' ))
 
 
         except:
@@ -1040,19 +1046,42 @@ class View(ttk.Frame):
         self.controller.draw_data_tab_1()
 
     def set_button_clicked_tab_1(self):
-        if self.controller:
-            #self.controller.open_data()
+
+        try :
             self.controller.set_data_tab_1()
+            self.set_button_count_tab_1.config(text='ok')
+            self.set_button_count_tab_1.after(self.delay_time,lambda: self.set_button_count_tab_1.config(text='Ustaw'))
+        except:
+            errors.err_bad_process()
+
 
     def draw_slice_button_clicked_tab_1(self):
         self.controller.draw_slice_data_tab_1()
 
     def export_clicked_tab_1(self):
-        self.controller.export_to_tab_0()
+
+        try:
+            self.controller.export_to_tab_0()
+
+
+            self.export_button_count_tab_1.config(text='ok')
+            self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Zapisz'))
+
+        except:
+            errors.err_export_problem()
+
 
 
     def save_modyfied_data_clicked_tab_1(self):
-        self.controller.save_modyfied_data_clicked_tab_1()
+        try:
+            self.controller.save_modyfied_data_clicked_tab_1()
+            self.save_button_tab_1.config(text='ok')
+            self.save_button_tab_1.after(self.delay_time, lambda: self.save_button_tab_1.config(text='Zapisz'))
+
+
+
+        except:
+            errors.err_save_problem()
 
 
 ###################################################################################################################################
@@ -1196,39 +1225,39 @@ class View(ttk.Frame):
 
 
 
-    def show_error(self, message):
-        """
-        Show an error message
-        :param message:
-        :return:
-        """
-        self.message_label['text'] = message
-        self.message_label['foreground'] = 'red'
-        self.message_label.after(3000, self.hide_message)
-
-
-    def show_success(self, message):
-        """
-        Show a success message
-        :param message:
-        :return:
-        """
-        self.message_label['text'] = message
-        self.message_label['foreground'] = 'green'
-        self.message_label.after(3000, self.hide_message)
-
-        # reset the form
-        self.name_entry['foreground'] = 'black'
-        self.open_name_var.set('')
-
-
-
-    def hide_message(self):
-        """
-        Hide the message
-        :return:
-        """
-        self.message_label['text'] = ''
+    # def show_error(self, message):
+    #     """
+    #     Show an error message
+    #     :param message:
+    #     :return:
+    #     """
+    #     self.message_label['text'] = message
+    #     self.message_label['foreground'] = 'red'
+    #     self.message_label.after(3000, self.hide_message)
+    #
+    #
+    # def show_success(self, message):
+    #     """
+    #     Show a success message
+    #     :param message:
+    #     :return:
+    #     """
+    #     self.message_label['text'] = message
+    #     self.message_label['foreground'] = 'green'
+    #     self.message_label.after(3000, self.hide_message)
+    #
+    #     # reset the form
+    #     self.name_entry['foreground'] = 'black'
+    #     self.open_name_var.set('')
+    #
+    #
+    #
+    # def hide_message(self):
+    #     """
+    #     Hide the message
+    #     :return:
+    #     """
+    #     self.message_label['text'] = ''
 
 ###################################################################################################################
 

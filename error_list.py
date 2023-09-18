@@ -8,3 +8,12 @@ class Errors:
 
     def err_bad_data(self):
         messagebox.showerror('Error', 'Coś poszło nie tak. Sprawdź plik i nazwy kolum')
+
+    def err_bad_process(self):
+        messagebox.showerror('Error', 'Coś poszło nie tak podczas zamiany zakresu czasu')
+
+    def err_save_problem (self):
+        messagebox.showerror('Error', 'Coś poszło nie tak podczas zapisu danch')
+
+    def err_export_problem(self):
+        messagebox.showerror('Error','Coś poszło nie tak podczas przesłyania dalej danych')
