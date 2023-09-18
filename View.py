@@ -130,6 +130,36 @@ class View(ttk.Frame):
 
 #####################################################################################################################
 
+        def validate_time(input):
+
+            # if input.istime():
+            #     print(input)
+            #     return True
+            #
+            # elif input is "":
+            #     print(input)
+            #     return True
+            #
+            # else:
+            #     print(input)
+            #
+            #     return False
+
+            pass
+
+        def on_invalid_time():
+            # MessageBox.ERROR('Wpisano literę. Muszą być cyfry', 'Błędny wpis')
+            messagebox.showerror('Błąd', 'Wpisano literę')
+
+        self.vcmd_time = (window.register(validate_time), '%P')
+        self.ivcmd_time = (self.register(on_invalid_time),)
+
+
+
+
+
+#####################################################################################################################
+
 
 
         # create widgets
@@ -234,12 +264,14 @@ class View(ttk.Frame):
 
         self.scope_down_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
         self.scope_down_entry.insert(0, get_data.scope_down_entry_tab0.get())
+        self.scope_down_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.scope_down_entry.grid(row=28, column=1, sticky=tk.NSEW)
 
         self.total_scope_label = ttk.Label(lf2, text='górny zakres:')
         self.total_scope_label.grid(row=28, column=2)
         self.scope_up_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
         self.scope_up_entry.insert(0, get_data.scope_up_entry_tab0.get())
+        self.scope_up_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.scope_up_entry.grid(row=28, column=3, sticky=tk.NSEW)
 
         ############################################
@@ -301,6 +333,7 @@ class View(ttk.Frame):
 
 
         self.distance_entry = ttk.Entry(lf3, textvariable=self.dist_border_var, width=30)
+        self.distance_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.distance_entry.grid(row=40, column=1, sticky=tk.NSEW)
 
 
@@ -317,6 +350,7 @@ class View(ttk.Frame):
 
 
         self.density_entry = ttk.Entry(lf3, textvariable=self.density_var, width=30)
+        self.density_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
 
@@ -328,9 +362,8 @@ class View(ttk.Frame):
 
         self.down_scope_label = ttk.Label(lf3, text='dolny zakres:')
         self.down_scope_label.grid(row = 80, column=0)
-
-
         self.down_scope_entry = ttk.Entry(lf3, textvariable=self.down_scope_var, width=30)
+        self.down_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.down_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
@@ -339,9 +372,8 @@ class View(ttk.Frame):
 
         self.up_scope_label = ttk.Label(lf3, text='górny zakres:')
         self.up_scope_label.grid(row = 80, column=2)
-
-
         self.up_scope_entry = ttk.Entry(lf3, textvariable=self.up_scope_var, width=30)
+        self.up_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.up_scope_entry.grid(row = 80, column=3, sticky=tk.NSEW)
 
 
@@ -398,6 +430,7 @@ class View(ttk.Frame):
         self.label_down_background_x_entry.grid(row=10, column=0)
         self.scope_down_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_down_back_entry_x_var, width=30)
         self.scope_down_background_x_entry.insert(0, get_data.scope_down_x_background_entry_tab0.get())
+        self.scope_down_background_x_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.scope_down_background_x_entry.grid(row=10, column=3, sticky=tk.NSEW)
 
 
@@ -407,6 +440,7 @@ class View(ttk.Frame):
 
         self.scope_up_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_up_back_entry_x_var, width=30)
         self.scope_up_background_x_entry.insert(0, get_data.scope_up_x_background_entry_tab0.get())
+        self.scope_up_background_x_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
         self.scope_up_background_x_entry.grid(row=10, column=5, sticky=tk.NSEW)
 
         self.distance_label = ttk.Label(lf4)
@@ -416,6 +450,7 @@ class View(ttk.Frame):
         self.scope_down_background_y_label.grid(row=20, column=0)
         self.scope_down_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_down_back_entry_y_var, width=30)
         self.scope_down_background_y_entry.insert(0, get_data.scope_down_y_background_entry_tab0.get())
+        self.scope_down_background_y_entry.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
         self.scope_down_background_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
 
         self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y:')
@@ -423,6 +458,7 @@ class View(ttk.Frame):
 
         self.scope_up_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_up_back_entry_y_var, width=30)
         self.scope_up_background_y_entry.insert(0, get_data.scope_up_y_background_entry_tab0.get())
+        self.scope_up_background_y_entry.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
         self.scope_up_background_y_entry.grid(row=20, column=5, sticky=tk.NSEW)
 
         self.distance_label = ttk.Label(lf4)
@@ -551,11 +587,13 @@ class View(ttk.Frame):
 
 
         self.down_scope_label = ttk.Label(lf102, text='zakres dolny:[hh:mm:ss]')
+
         self.down_scope_label.grid(row = 10, column=0)
 
 
         self.down_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.down_scope_var_tab_1, width=30)
         self.down_scope_entry_tab_1.insert(0, get_data.down_scope_tab1.get())
+        self.down_scope_entry_tab_1.config(validate="key", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
         self.down_scope_entry_tab_1.grid(row = 10, column=1, sticky=tk.NSEW)
 
         #######################
@@ -563,11 +601,13 @@ class View(ttk.Frame):
 
 
         self.up_scope_label = ttk.Label(lf102, text='zakres górny:[hh:ss:mm]')
+
         self.up_scope_label.grid(row = 10, column=2)
 
 
         self.up_scope_entry_tab_1 = ttk.Entry(lf102, textvariable=self.up_scope_var_tab_1, width=30)
         self.up_scope_entry_tab_1.insert(0, get_data.up_scope_tab_1.get())
+        self.up_scope_entry_tab_1.config(validate="key", validatecommand=self.vcmd_time, invalidcommand=self.ivcmd_time)
         self.up_scope_entry_tab_1.grid(row = 10, column=3, sticky=tk.NSEW)
 
 
@@ -594,7 +634,9 @@ class View(ttk.Frame):
         self.draw_slice_button_count_tab_1.grid(row=20, column=4, padx=10)
 
         self.scale_time_chart_entry_tab_1 = ttk.Entry(lf103, textvariable=self.scale_time_chart, width=15)
+        self.scale_time_chart_entry_tab_1.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
         self.scale_time_chart_entry_tab_1.insert(0,get_data.scale_time_chart.get())
+
         self.scale_time_chart_entry_tab_1.grid(row=1, column=1, sticky=tk.NSEW)
 
 
@@ -849,9 +891,6 @@ class View(ttk.Frame):
 
 
 
-
-
-
     def show_open_file_clicked_tab_0(self):
 
         file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
@@ -889,8 +928,6 @@ class View(ttk.Frame):
         """
         if self.controller:
             self.controller.open_data()
-
-
 
 
 
