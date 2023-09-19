@@ -122,7 +122,7 @@ class View(ttk.Frame):
                 print(input)
                 return True
 
-            elif input is "":
+            elif input == "":
                 print(input)
                 return True
 
@@ -160,6 +160,45 @@ class View(ttk.Frame):
 
         self.vcmd_time = (window.register(validate_time), '%P')
         self.ivcmd_time = (window.register(on_invalid_time),)
+######################################################################################################################
+
+        def validate_fraction01(input):
+            try:
+                input = eval(input)
+                if isinstance(input, float) and 0 < input <1:
+                    return True
+
+
+                elif input == 1 :
+                    return True
+
+                else:
+
+                    return False
+            except:
+                return False
+
+        def on_invalid_fraction01():
+
+            messagebox.showerror('ERROR', 'Wpisano nieprawidłową wartość - wpisz (0,1>')
+
+        self.vcmd_fraction_01 = (window.register(validate_fraction01), '%P')
+        self.ivcmd_fraction_01 = (window.register(on_invalid_fraction01),)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -356,7 +395,7 @@ class View(ttk.Frame):
 
 
         self.density_entry = ttk.Entry(lf3, textvariable=self.density_var, width=30)
-        self.density_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.density_entry.config(validate="focusout", validatecommand=self.vcmd_fraction_01, invalidcommand=self.ivcmd_fraction_01)
         self.density_entry.grid(row = 60, column=1, sticky=tk.NSEW)
 
 
@@ -477,6 +516,7 @@ class View(ttk.Frame):
 
         self.trans_picture_entry = ttk.Entry(lf4, textvariable=self.trans_picture, width=5)
         self.trans_picture_entry.insert(0, get_data.trasparency_picture.get())
+        self.trans_picture_entry.config(validate="focusout", validatecommand=self.vcmd_fraction_01,invalidcommand=self.ivcmd_fraction_01)
         self.trans_picture_entry.grid(row=30, column=4, sticky=tk.W)
 
 
