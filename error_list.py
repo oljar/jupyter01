@@ -17,5 +17,12 @@ class Errors:
 
     def err_export_problem(self):
         messagebox.showerror('Error','Coś poszło nie tak podczas przesłyania dalej danych')
-    def err_export_count(self):
-        messagebox.showerror('Error','Coś poszło nie tak podczas przesłyania dalej danych')
+    def err_basic_count(self):
+        messagebox.showerror('Error','Sprawdż ustawienia tej zakładki')
+
+    def err_modify_count(self):
+        messagebox.showerror('Error', 'Sprawdż ustawienia tej zakładki')
+
+
+    def err_background_open(self):
+        messagebox.showerror('Error', 'Coś poszło nie tak - nie pobrano tła')
