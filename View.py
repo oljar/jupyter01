@@ -133,7 +133,7 @@ class View(ttk.Frame):
 
         def on_invalid_number():
 
-            messagebox.showerror('ERROR', 'Wpisano literę')
+            messagebox.showerror('ERROR', 'Wpisano literę- wpisz liczbę')
 
         self.vcmd_number = (window.register(validate_number), '%P')
         self.ivcmd_number = (window.register(on_invalid_number),)
@@ -185,24 +185,40 @@ class View(ttk.Frame):
         self.vcmd_fraction_01 = (window.register(validate_fraction01), '%P')
         self.ivcmd_fraction_01 = (window.register(on_invalid_fraction01),)
 
+#########################################################################################################################
+
+        def validate_proc(input):
+            try:
+                input = eval(input)
+                if isinstance(input, int) and 0 < input < 100:
+                    return True
+
+
+                elif input == 0:
+                    return True
+
+                elif input == 100:
+                    return True
+
+
+                else:
+
+                    return False
+            except:
+                return False
 
 
 
+        def on_invalid_proc():
+
+            messagebox.showerror('ERROR', 'Wpisano nieprawidłową wartość- wpisz liczbę <0,100>')
 
 
 
+        self.vcmd_proc = (window.register(validate_proc), '%P')
+        self.ivcmd_proc = (window.register(on_invalid_proc),)
 
-
-
-
-
-
-
-
-
-
-
-####################################################################################################################
+        ####################################################################################################################
 #errors
 ####################################################################################################################
 
@@ -307,19 +323,19 @@ class View(ttk.Frame):
         self.label = ttk.Label(lf2)
         self.label.grid(row=27, column=0)
 
-        self.label = ttk.Label(lf2, text='dolny zakres:')
+        self.label = ttk.Label(lf2, text='dolny zakres: [%]')
         self.label.grid(row=28, column=0)
 
         self.scope_down_entry = ttk.Entry(lf2, textvariable=self.total_down_scope_var, width=30)
         self.scope_down_entry.insert(0, get_data.scope_down_entry_tab0.get())
-        self.scope_down_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.scope_down_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.scope_down_entry.grid(row=28, column=1, sticky=tk.NSEW)
 
-        self.total_scope_label = ttk.Label(lf2, text='górny zakres:')
+        self.total_scope_label = ttk.Label(lf2, text='górny zakres: [%]')
         self.total_scope_label.grid(row=28, column=2)
         self.scope_up_entry = ttk.Entry(lf2, textvariable=self.total_up_scope_var, width=30)
         self.scope_up_entry.insert(0, get_data.scope_up_entry_tab0.get())
-        self.scope_up_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.scope_up_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.scope_up_entry.grid(row=28, column=3, sticky=tk.NSEW)
 
         ############################################
@@ -405,20 +421,20 @@ class View(ttk.Frame):
         self.label.grid(row=70, column=0)
 
 
-        self.down_scope_label = ttk.Label(lf3, text='dolny zakres:')
+        self.down_scope_label = ttk.Label(lf3, text='dolny zakres [%]:')
         self.down_scope_label.grid(row = 80, column=0)
         self.down_scope_entry = ttk.Entry(lf3, textvariable=self.down_scope_var, width=30)
-        self.down_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.down_scope_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.down_scope_entry.grid(row = 80, column=1, sticky=tk.NSEW)
 
         #######################
 
 
 
-        self.up_scope_label = ttk.Label(lf3, text='górny zakres:')
+        self.up_scope_label = ttk.Label(lf3, text='górny zakres [%]:')
         self.up_scope_label.grid(row = 80, column=2)
         self.up_scope_entry = ttk.Entry(lf3, textvariable=self.up_scope_var, width=30)
-        self.up_scope_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
+        self.up_scope_entry.config(validate="focusout", validatecommand=self.vcmd_proc, invalidcommand=self.ivcmd_proc)
         self.up_scope_entry.grid(row = 80, column=3, sticky=tk.NSEW)
 
 
@@ -470,16 +486,16 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=0, column=0)
 
-        self.label_down_background_x_entry = ttk.Label(lf4, text='dolny zakres x:')
+        self.label_down_background_x_entry = ttk.Label(lf4, text='dolny zakres x: [int]')
         self.label_down_background_x_entry.grid(row=10, column=0)
         self.scope_down_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_down_back_entry_x_var, width=30)
         self.scope_down_background_x_entry.insert(0, get_data.scope_down_x_background_entry_tab0.get())
         self.scope_down_background_x_entry.config(validate="key", validatecommand=self.vcmd_number, invalidcommand=self.ivcmd_number)
-        self.scope_down_background_x_entry.grid(row=10, column=3, sticky=tk.NSEW)
+        self.scope_down_background_x_entry.grid(row=10, column=2, sticky=tk.NSEW)
 
 
 
-        self.label_up_background_x_entry = ttk.Label(lf4, text='górny zakres x:')
+        self.label_up_background_x_entry = ttk.Label(lf4, text='górny zakres x: [int]')
         self.label_up_background_x_entry.grid(row=10, column=4)
 
         self.scope_up_background_x_entry = ttk.Entry(lf4, textvariable = self.scope_up_back_entry_x_var, width=30)
@@ -490,14 +506,14 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf4)
         self.distance_label.grid(row=15, column=0)
 
-        self.scope_down_background_y_label = ttk.Label(lf4, text='dolny zakres y:')
+        self.scope_down_background_y_label = ttk.Label(lf4, text='dolny zakres y: [int]')
         self.scope_down_background_y_label.grid(row=20, column=0)
         self.scope_down_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_down_back_entry_y_var, width=30)
         self.scope_down_background_y_entry.insert(0, get_data.scope_down_y_background_entry_tab0.get())
         self.scope_down_background_y_entry.config(validate="key", validatecommand=self.vcmd_number,invalidcommand=self.ivcmd_number)
-        self.scope_down_background_y_entry.grid(row=20, column=3, sticky=tk.NSEW)
+        self.scope_down_background_y_entry.grid(row=20, column=2, sticky=tk.NSEW)
 
-        self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y:')
+        self.scope_up_background_y_label = ttk.Label(lf4, text='górny zakres y: [int]')
         self.scope_up_background_y_label.grid(row=20, column=4)
 
         self.scope_up_background_y_entry = ttk.Entry(lf4, textvariable=self.scope_up_back_entry_y_var, width=30)
