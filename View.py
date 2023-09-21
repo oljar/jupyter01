@@ -1062,7 +1062,7 @@ class View(ttk.Frame):
             self.controller.export_nature_data_tab_0()
             self.switch_modyfied_export = False
             self.export_button_natural_data_tab_0.config(text='ok')
-            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='dalej'))
+            self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Dalej'))
         except:
             errors.err_export_problem()
 
@@ -1126,7 +1126,7 @@ class View(ttk.Frame):
 
             self.open_name_var.set(str(file11.name))
             self.open_button_data_tab_1.config(text='ok')
-            self.open_button_data_tab_1.after(self.delay_time,lambda: self.open_button_data_tab_1.config(text='Pobierz dane'))
+            self.open_button_data_tab_1.after(self.delay_time,lambda: self.open_button_data_tab_1.config(text='Wskaż plik csv'))
         except:
 
             errors.err_lack_of_file()
@@ -1180,7 +1180,7 @@ class View(ttk.Frame):
 
 
             self.export_button_count_tab_1.config(text='ok')
-            self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Zapisz'))
+            self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Dalej'))
 
         except:
             errors.err_export_problem()
