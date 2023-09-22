@@ -962,7 +962,7 @@ class View(ttk.Frame):
             file1 = askopenfile(initialdir='C:\\Users\oljar\PycharmProjects\jupiter02', mode='r', filetypes=[('CSV Files', '*.csv')])
             self.open_name_var.set(str(file1.name))
             self.show_file_tab0.config(text='ok')
-            self.show_file_tab0.after(self.delay_time,lambda: self.show_file_tab0.config(text='Pobierz dane'))
+            self.show_file_tab0.after(self.delay_time,lambda: self.show_file_tab0.config(text='Wskaż plik csv'))
 
 
 
@@ -1053,18 +1053,21 @@ class View(ttk.Frame):
         try:
             self.controller.save_nature_data_tab_0()
             self.save_natural_button_tab0.config(text='ok')
-            self.save_natural_button_tab0.after(self.delay_time, lambda: self.save_natural_button_tab0.config(text='Pobierz dane'))
+            self.save_natural_button_tab0.after(self.delay_time, lambda: self.save_natural_button_tab0.config(text='Zapisz'))
         except:
             errors.err_save_problem()
 
     def export_nature_data_button_clicked_tab_0(self):
+        self.turn_on_button_pull_data()
         try:
             self.controller.export_nature_data_tab_0()
             self.switch_modyfied_export = False
             self.export_button_natural_data_tab_0.config(text='ok')
             self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Dalej'))
+
         except:
             errors.err_export_problem()
+
 
 
 
@@ -1088,7 +1091,7 @@ class View(ttk.Frame):
             errors.err_save_problem()
 
     def export_modyfied_button_clicked_tab_0(self):
-
+        self.turn_on_button_pull_data()
         try:
             self.switch_modyfied_export = True
             self.controller.export_modyfied_data_tab_0()
@@ -1112,8 +1115,15 @@ class View(ttk.Frame):
 
 
 
+    def turn_on_button_pull_data(self):
+        self.open_button_tab0.config(state="enabled")
+        self.show_file_tab0.config(state="enabled")
 
-#####################################################################################################################
+    def turn_off_button_pull_data(self):
+        self.open_button_tab0.config(state="disabled")
+        self.show_file_tab0.config(state="disabled")
+
+    #####################################################################################################################
 
 
 
@@ -1182,8 +1192,11 @@ class View(ttk.Frame):
             self.export_button_count_tab_1.config(text='ok')
             self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Dalej'))
 
+
         except:
             errors.err_export_problem()
+
+        self.turn_off_button_pull_data()
 
 
 
