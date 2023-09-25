@@ -20,7 +20,7 @@ import time
 
 window = tk.Tk()
 window.title("Chart plotter")
-window.geometry('790x850')
+window.geometry('790x890')
 
 tab_parent = ttk.Notebook(window)
 tab0 = ttk.Frame(tab_parent)
@@ -368,22 +368,31 @@ class View(ttk.Frame):
 
         def formula_field_fill(event):
             temp = self.combobox_measure_reducer.get()
-            if temp == "110":
+            if temp == "zwężka-110":
                 self.formula_x_entry.delete(0, END)
                 self.formula_x_entry.insert(0, get_formula.get_formula_110)
-            elif temp == "160":
+            elif temp == "zwężka-160":
                 self.formula_x_entry.delete(0, END)
                 self.formula_x_entry.insert(0, get_formula.get_formula_160)
-            elif temp == "200":
+            elif temp == "zwężka-200":
                 self.formula_x_entry.delete(0, END)
                 self.formula_x_entry.insert(0, get_formula.get_formula_200)
+            elif temp == "user1":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_1)
+            elif temp == "user2":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_2)
+            elif temp == "user3":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_user_3)
 
 
 
 
-        self.distance_label = ttk.Label(lf2,text = 'typ zwężki')
+        self.distance_label = ttk.Label(lf2,text = 'typ testu')
         self.distance_label.grid(row=32, column=0)
-        self.combobox_measure_reducer = ttk.Combobox(lf2, values = ('110','160','200'), )
+        self.combobox_measure_reducer = ttk.Combobox(lf2, values = ('zwężka-110','zwężka-160','zwężka-200','user1','user2','user3'), )
         self.combobox_measure_reducer.bind('<<ComboboxSelected>>', formula_field_fill)
 
         self.combobox_measure_reducer.grid(row=32, column=1)

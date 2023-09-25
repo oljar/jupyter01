@@ -3,3 +3,6 @@ class GetFormula:
         self.get_formula_110 = '19.2*math.sqrt(x)'
         self.get_formula_160 = '41.1*math.sqrt(x)'
         self.get_formula_200 = '64.8*math.sqrt(x)'
+        self.get_user_1 = ''
+        self.get_user_2 = ''
+        self.get_user_3 = ''
