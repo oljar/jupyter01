@@ -1,6 +1,7 @@
 import re
 import tkinter as tk
 from tkinter import ttk
+from formula_source import *
 
 import error_list
 import source
@@ -28,6 +29,7 @@ tab2 = ttk.Frame(tab_parent)
 tab3 = ttk.Frame(tab_parent)
 
 get_data = GetData()
+get_formula = GetFormula()
 
 errors = Errors()
 
@@ -108,6 +110,8 @@ class View(ttk.Frame):
         self.save_name_cfg_var = tk.StringVar()
 
         self.delay_time = 500
+
+        self.combobox_list_value = tk.StringVar()
 
 
 #########################################################################################################################
@@ -351,6 +355,7 @@ class View(ttk.Frame):
         self.formula_x_entry.insert(0,get_data.formula_x.get())
         self.formula_x_entry .grid(row=30, column=1, sticky=tk.NSEW)
 
+
         self.label = ttk.Label(lf2, text='wzór korekcyjny - y')
         self.label.grid(row=30, column=2)
 
@@ -361,8 +366,36 @@ class View(ttk.Frame):
         self.distance_label = ttk.Label(lf2)
         self.distance_label.grid(row=31, column=0)
 
-        self.label = ttk.Label(lf3)
-        self.label.grid(row=32, column=0)
+        def formula_field_fill(event):
+            temp = self.combobox_measure_reducer.get()
+            if temp == "110":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_110)
+            elif temp == "160":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_160)
+            elif temp == "200":
+                self.formula_x_entry.delete(0, END)
+                self.formula_x_entry.insert(0, get_formula.get_formula_200)
+
+
+
+
+        self.distance_label = ttk.Label(lf2,text = 'typ zwężki')
+        self.distance_label.grid(row=32, column=0)
+        self.combobox_measure_reducer = ttk.Combobox(lf2, values = ('110','160','200'), )
+        self.combobox_measure_reducer.bind('<<ComboboxSelected>>', formula_field_fill)
+
+        self.combobox_measure_reducer.grid(row=32, column=1)
+
+
+
+
+
+
+        self.label = ttk.Label(lf2)
+        self.label.grid(row=33, column=0)
+
 
         self.count_button_count_basic_tab0 = ttk.Button(lf2, text='Przelicz', command=self.count_natural_button_clicked_tab_0)
         self.count_button_count_basic_tab0.grid(row=35, column=0, padx=10)
