@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import seaborn as sns
-
+import math
 
 
 class Controller:
@@ -88,7 +88,7 @@ class Controller:
 
         self.x_exam_pts = (df1[x_tag]).tolist()  # definition of columns -x
 
-        cor_factor_x = str(self.view.x_math_form.get())
+        cor_factor_x = self.view.x_math_form.get()
 
         self.x_exam_pts = [eval(cor_factor_x) for x in self.x_exam_pts]
 

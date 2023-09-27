@@ -4,6 +4,7 @@ from formula_source import *
 from data_source import *
 import datetime
 from error_list import *
+import math
 
 
 
@@ -1054,13 +1055,13 @@ class View(ttk.Frame):
 
 
     def count_natural_button_clicked_tab_0(self):
-        try:
-            self.controller.counter()
-            self.count_button_count_basic_tab0.config(text='ok')
-            self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
+        # try:
+        self.controller.counter()
+        self.count_button_count_basic_tab0.config(text='ok')
+        self.count_button_count_basic_tab0.after(self.delay_time,lambda: self.count_button_count_basic_tab0.config(text='Przelicz'))
 
-        except:
-            errors.err_basic_count()
+  #      except:
+   #         errors.err_basic_count()
 
 
     def count_modify_button_clicked_tab_0(self):
