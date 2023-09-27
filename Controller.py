@@ -1,18 +1,8 @@
-import re
-import tkinter as tk
-from tkinter import ttk
 
-import pandas
-
-import source
-
-import csv
 import pandas as pd
-from scipy.spatial import distance
+
 import numpy.polynomial.polynomial as poly
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+
 from datetime import datetime
 import numpy as np
 
@@ -20,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import seaborn as sns
-import copy
+
 
 
 class Controller:

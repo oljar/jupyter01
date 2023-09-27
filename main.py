@@ -1,7 +1,4 @@
-import re
 import tkinter as tk
-from tkinter import ttk
-import source
 from Controller import Controller
 from Model import Model
 from View import View

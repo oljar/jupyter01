@@ -1,21 +1,10 @@
-import re
 import tkinter as tk
 from tkinter import ttk
 from formula_source import *
-
-import error_list
-import source
-from Controller import Controller
-from Model import Model
-from tkinter import *
-from tkinter.ttk import *
-from tkinter.filedialog import askopenfile
-from tkinter.filedialog import asksaveasfile
 from data_source import *
-from tkinter import messagebox
 import datetime
 from error_list import *
-import time
+
 
 
 window = tk.Tk()
