@@ -411,6 +411,8 @@ class View(ttk.Frame):
         self.export_button_natural_data_tab_0.grid(row=35, column=3, padx=10)
 
 
+
+
         #######################
 
 
@@ -1096,6 +1098,8 @@ class View(ttk.Frame):
             self.switch_modyfied_export = False
             self.export_button_natural_data_tab_0.config(text='ok')
             self.export_button_natural_data_tab_0.after(self.delay_time, lambda: self.export_button_natural_data_tab_0.config(text='Dalej'))
+            tab_parent.select(tab2)
+
 
         except:
             errors.err_export_problem()
@@ -1129,6 +1133,7 @@ class View(ttk.Frame):
             self.controller.export_modyfied_data_tab_0()
             self.export_button_modify_data_tab_0.config(text='ok')
             self.export_button_modify_data_tab_0.after(self.delay_time,lambda: self.export_button_modify_data_tab_0.config(text='Dalej'))
+            tab_parent.select(tab2)
         except:
             errors.err_export_problem()
 
@@ -1223,6 +1228,7 @@ class View(ttk.Frame):
 
             self.export_button_count_tab_1.config(text='ok')
             self.export_button_count_tab_1.after(self.delay_time, lambda: self.export_button_count_tab_1.config(text='Dalej'))
+            tab_parent.select(tab0)
 
 
         except:

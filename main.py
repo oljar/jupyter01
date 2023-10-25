@@ -91,6 +91,15 @@ V.tab_parent.add(V.tab3,text = 'jednostki')
 V.tab_parent.add(V.tab1,text = 'zakres')
 V.tab_parent.add(V.tab0,text = 'ustawienia')
 V.tab_parent.add(V.tab2,text = 'agregacja')
+def change_tab_agr():
+    V.tab_parent.select(V.tab2)
+def change_tab_zakr():
+    V.tab_parent.select(V.tab1)
+def change_tab_ustaw():
+    V.tab_parent.select(V.tab0)
+
+
+
 
 
 V.tab_parent.pack(expand = 1, fill = 'both')
