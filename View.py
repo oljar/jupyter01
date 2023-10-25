@@ -9,7 +9,7 @@ import math
 
 
 window = tk.Tk()
-window.title("Chart plotter")
+window.title("Chart plotter v.1.2")
 window.geometry('790x890')
 
 tab_parent = ttk.Notebook(window)
