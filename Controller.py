@@ -711,6 +711,8 @@ class Controller:
             plt.imshow(img, extent=[int(self.model.scope_down_back_entry_x_var),int(self.model.scope_up_back_entry_x_var),int(self.model.scope_down_back_entry_y_var), int(self.model.scope_up_back_entry_y_var)], aspect='auto', alpha= self.model.trans_picture)
 
         plt.title((solist[0])[4])
+        plt.xlim(0)
+        plt.ylim(0)
         plt.show()
 
     def united_chart_execution_tab_2(self):
